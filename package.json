@@ -1,0 +1,23 @@
+{
+  "name": "airside-database-management-system",
+  "version": "1.0.0",
+  "description": "A postgreSQL database management system software solution for Tampa International Airport",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkaburis/Airside-Database-Management-System.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkaburis/Airside-Database-Management-System/issues"
+  },
+  "homepage": "https://github.com/mkaburis/Airside-Database-Management-System#readme",
+  "dependencies": {
+    "pg": "^8.0.2",
+    "terminal-kit": "^1.35.2"
+  }
+}
