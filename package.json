@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/mkaburis/Airside-Database-Management-System#readme",
   "dependencies": {
-    "pg": "^8.0.2",
-    "terminal-kit": "^1.35.2"
+    "body-parser": "^1.19.0",
+    "consolidate": "^0.15.1",
+    "dustjs-helpers": "^1.7.4",
+    "dustjs-linkedin": "^2.7.5",
+    "express": "^4.17.1",
+    "pg": "^8.0.2"
   }
 }
