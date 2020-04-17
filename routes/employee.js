@@ -1,4 +1,5 @@
 const express = require('express');
+const db = require('../db/postgres');
 
 const router = express.Router();
 
@@ -23,8 +24,13 @@ router.get('/:employeeId', (req, res) => {
 });
 
 /* Post checkin a passgner to a flight. */
-router.post('/:employeeId/flight/:flightId/checkin/:passengerId', (req, res, next) => {
-  res.send(`${req.employeeId} checked in ${req.passengerId} for flight ${req.flightId}`);
-});
+router.post(
+  '/:employeeId/flight/:flightId/checkin/:passengerId',
+  (req, res) => {
+    res.send(
+      `${req.employeeId} checked in ${req.passengerId} for flight ${req.flightId}`
+    );
+  }
+);
 
 module.exports = router;

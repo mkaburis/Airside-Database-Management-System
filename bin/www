@@ -4,10 +4,9 @@
  * Module dependencies.
  */
 
-import { createServer } from 'http';
-import app, { set } from '../app';
-
+const { createServer } = require('http');
 const debug = require('debug')('airside-database-management-system:server');
+const { app, set } = require('../app');
 
 /**
  * Normalize a port into a number, string, or false.
@@ -46,9 +45,7 @@ function onError(error) {
     throw error;
   }
 
-  const bind = typeof port === 'string'
-    ? `Pipe ${port}`
-    : `Port ${port}`;
+  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -77,12 +74,9 @@ const server = createServer(app);
 
 function onListening() {
   const addr = server.address();
-  const bind = typeof addr === 'string'
-    ? `pipe ${addr}`
-    : `port ${addr.port}`;
+  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
   debug(`Listening on ${bind}`);
 }
-
 
 /**
  * Listen on provided port, on all network interfaces.
