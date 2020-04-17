@@ -45,3 +45,4 @@ REFERENCES Passengers(PassengerID) NOT NULL, CheckedIn BOOLEAN, Connecting BOOLE
 
 -- Copy .csv files
 \copy Concourses(GateNo, Airside) FROM 'concourses.csv' WITH DELIMITER ',' CSV HEADER;
+\copy Destinations(AirportCode, AirportName, City, AdministrativeDivision, Country) FROM 'destinations.csv' WITH DELIMITER ',' CSV HEADER;
