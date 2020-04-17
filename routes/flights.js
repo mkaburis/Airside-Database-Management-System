@@ -1,12 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
+
+const router = express.Router();
 
 /* GET flight listing. */
-/* Will add query parameters later */ 
-router.get('/', function(req, res, next) {
-  res.send('Gets list of flights');
+/* Will add query parameters later */
+router.get("/", (req, res) => {
+  res.send("Gets list of flights");
 });
-
-
 
 module.exports = router;
