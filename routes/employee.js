@@ -1,5 +1,4 @@
 const express = require('express');
-const db = require('../db/postgres');
 
 const router = express.Router();
 

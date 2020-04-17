@@ -18,6 +18,8 @@ pool.query('SELECT NOW()', (err, res) => {
   pool.end();
 });
 
-pool.query;
->
-module.exports = postgressDb;
+module.exports = {
+  queryPassengers() {
+    console.log('query pass');
+  },
+};

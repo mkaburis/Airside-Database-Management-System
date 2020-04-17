@@ -23,10 +23,9 @@ router.get('/:userId/flights/:flightId', (req, res) => {
   res.send(`Info about flight ${req.flightId} for passenger ${req.userId}`);
 });
 
-
 /* Get a list of user's flights */
 router.get('/:userId/flights', (req, res) => {
   res.send(`Info about a all flight taken by passenger ${req.userId}`);
 });
 
-export default router;
+module.exports = router;
