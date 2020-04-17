@@ -24,6 +24,8 @@ Permission INTEGER);
 
 CREATE TABLE Planes(PlaneModel VARCHAR(10) PRIMARY KEY, Manufacturer TEXT, SeatingCapacity INTEGER);
 
+CREATE TABLE Concourses(GateNo VARCHAR(3) PRIMARY KEY, Airside VARCHAR(1));
+
 CREATE TABLE Destinations(AirportCode VARCHAR(3) PRIMARY KEY, AirportName TEXT, City TEXT, 
 AdministrativeDivision TEXT, Country TEXT);
 
@@ -35,13 +37,11 @@ DOB DATE, DLNo VARCHAR(50) NULL UNIQUE, PassportNo VARCHAR(50) NULL UNIQUE, Nati
 TSAPre BOOLEAN, AirportCode VARCHAR(3) REFERENCES Destinations NOT NULL);
 
 CREATE TABLE FlightLogs(FlightID SERIAL PRIMARY KEY, DepartureTime TIMESTAMP(0), 
-ArrivalTime TIMESTAMP(0) NULL, Airline VARCHAR(20), GateNo VARCHAR(3), IsDelayed BOOLEAN, PlaneModel VARCHAR(10) 
-REFERENCES Planes NOT NULL, RouteId SERIAL REFERENCES Routes NOT NULL);
+ArrivalTime TIMESTAMP(0) NULL, Airline VARCHAR(20), GateNo VARCHAR(3) REFERENCES Concourses NOT NULL, 
+IsDelayed BOOLEAN, PlaneModel VARCHAR(10) REFERENCES Planes NOT NULL, RouteId SERIAL REFERENCES Routes NOT NULL);
 
 CREATE TABLE PassengerFlights(FlightID SERIAL REFERENCES FlightLogs(FlightID) NOT NULL, PassengerID SERIAL
 REFERENCES Passengers(PassengerID) NOT NULL, CheckedIn BOOLEAN, Connecting BOOLEAN);
 
-
-
-
-
+-- Copy .csv files
+\copy Concourses(GateNo, Airside) FROM 'concourses.csv' WITH DELIMITER ',' CSV HEADER;
