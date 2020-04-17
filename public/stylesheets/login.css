@@ -57,6 +57,10 @@ html {
     min-height: 100%;
     padding: 20px;
   }
+
+  form {
+    margin-top: 16;
+  }
   
   #formContent {
     -webkit-border-radius: 10px 10px 10px 10px;
@@ -70,6 +74,15 @@ html {
     -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     text-align: center;
+  }
+
+  #formHeader {
+    background-color: #f6f6f6;
+    border-bottom: 1px solid #dce8f1;
+    padding: 25px;
+    text-align: center;
+    -webkit-border-radius: 0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
   }
   
   #formFooter {
