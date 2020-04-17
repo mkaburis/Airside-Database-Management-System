@@ -2,12 +2,13 @@
 /* BASIC */
 
 html {
-    background-color: #56baed;
+    background-color: #56baed !important;
   }
   
   body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
+    background-color: #56baed !important;
   }
   
   a {
@@ -15,6 +16,14 @@ html {
     display:inline-block;
     text-decoration: none;
     font-weight: 400;
+  }
+
+  h1 {
+    text-align: center;
+    font-family: Marker Felt, fantasy;
+    display:inline-block;
+    margin: 40px 8px 10px 8px; 
+    color: #333333;
   }
   
   h2 {
@@ -25,6 +34,14 @@ html {
     display:inline-block;
     margin: 40px 8px 10px 8px; 
     color: #cccccc;
+  }
+
+  h4 {
+    text-align: center;
+    font-family: Marker Felt, fantasy;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333333;
   }
   
   
@@ -259,5 +276,11 @@ html {
   
   #icon {
     width:60%;
+  }
+
+  img {
+    margin-bottom: 50px;
+    max-width: 90%;
+    max-height: 90%;
   }
   
