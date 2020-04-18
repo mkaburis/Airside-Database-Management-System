@@ -1,42 +1,69 @@
+<!DOCTYPE html>
 <html>
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/> -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
-integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" id="bootstrap-css"/>
-<link href="stylesheets/login.css" rel="stylesheet"/>
 
-<!------ Include the above in your HEAD tag ---------->
+  <head>
+    <title>
+      Airside Login
+    </title>
 
-<div class="wrapper fadeInDown">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link href="stylesheets/materialize.min.css" rel="stylesheet" />
 
-  <div id="page_title">
-  </div>
-  <div id="img_header">
-    <img src="airplane_clipart.png" alt="">
-   </div>
-  <div id="formContent">
-    <!-- Tabs Titles -->
-    <div id="formHeader">
-      <h3>Airport System Login</h2>
+    <link href="stylesheets/login.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="wrapper fadeInDown">
+
+      <div id="page_title">
+      </div>
+      <div id="img_header">
+        <img src="airplane_clipart.png" alt="">
+      </div>
+      <div id="formContent">
+        <!-- Tabs Titles -->
+        <div id="formHeader">
+          <h3>Airport System Login</h3>
+        </div>
+
+        <div class="row">
+          <form class="col s12">
+            <h1>Airside</h1>
+            <h4>Tampa International Airport's DBMS</h4>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="loginInput" type="text" class="validate">
+                <label for="loginInput">Username</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="passwordInput" type="password" class="validate">
+                <label for="passwordInput">Password</label>
+              </div>
+            </div>
+            <div class="row">
+              <div clas="col s3">
+                <button class="btn waves-effect waves-light" type="button" name="loginBtn">Login
+                  <i class="material-icons right">send</i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+          <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>
+
+      </div>
     </div>
+    <script src="javascripts/materialize.min.js"></script>
+    <script src="javascripts/login.js"></script>
+  </body>
 
-    <!-- Login Form -->
-    <form>
-      <H1>Airside</H1>
-      <H4>Tampa International Airport's DBMS</H4>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
-    </form>
-
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a>
-    </div>
-
-  </div>
-</div>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </html>
