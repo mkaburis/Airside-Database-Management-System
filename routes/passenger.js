@@ -11,11 +11,14 @@ router.get('/:userId', async (req, res) => {
   } = await db.query('SELECT * FROM passenger WHERE passengerid = $1', [
     userId
   ]);
-  res.send(rows);
-  // res.send(`Info about a specific passenger with userId ${req.userId}`);
+  if (rows.length < 1) {
+    res.sendStatus(404).json({ error: 'user\'s information not found' });
+  } else {
+    res.send(rows[0]);
+  }
 });
 
-/* Get a list of user's flights */
+/* Gets user's information about a specific flight */
 router.get('/:userId/flights/:flightId', async (req, res) => {
   const { flightId, userId } = req.params;
   const { rows } = await db.query(
@@ -25,13 +28,29 @@ router.get('/:userId/flights/:flightId', async (req, res) => {
     + ' WHERE passengers.passengerid = $1 AND flightlogs.flightId = $2',
     [userId, flightId]
   );
-  res.send(rows);
+
+  if (rows.length < 1) {
+    res.sendStatus(404).json({ error: `user's information about flight ${flightId} not found` });
+  } else {
+    res.send(rows[0]);
+  }
 });
 
 /* Get a list of user's flights */
-router.get('/:userId/flights', (req, res) => {
+router.get('/:userId/flights', async (req, res) => {
   const { userId } = req.params;
-  res.send(`Info about a all flight taken by passenger ${userId}`);
+  const { rows } = await db.query(
+    'SELECT * FROM passengers'
+    + ' INNER JOIN passengerflights ON passengers.passengerid = passengerflights.passengerid'
+    + ' INNER JOIN flightlogs ON passengerflights.flightId = flightlogs.flightId'
+    + ' WHERE passengers.passengerid = $1',
+    [userId]
+  );
+  if (rows.length < 1) {
+    res.sendStatus(404).json({ error: 'user\'s flight information not found' });
+  } else {
+    res.send(rows[0]);
+  }
 });
 
 module.exports = router;
