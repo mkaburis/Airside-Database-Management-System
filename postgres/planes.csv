@@ -1,0 +1,59 @@
+﻿AircraftID,PlaneName,SeatingCapacity
+ND2,Aerospatiale (Nord) 262,26
+CRV,Aerospatiale (Sud Aviation) Se.210 Caravelle,80
+NDC,Aerospatiale SN.601 Corvette,14
+AT4,Aerospatiale/Alenia ATR 42-300,48
+AT5,Aerospatiale/Alenia ATR 42-500,48
+ATR,Aerospatiale/Alenia ATR 42-600,48
+AT7,Aerospatiale/Alenia ATR 72,66
+AB3,Airbus A300,247
+310,Airbus A310,220
+318,Airbus A318,132
+319,Airbus A319,156
+31N,Airbus A319neo,156
+320,Airbus A320,150
+32N,Airbus A320neo,186
+321,Airbus A321,199
+32Q,Airbus A321neo,211
+330,Airbus A330,257
+332,Airbus A330-200,263
+333,Airbus A330-300,260
+338,Airbus A330-800neo,259
+340,Airbus A340,260
+342,Airbus A340-200,310
+343,Airbus A340-300,250
+345,Airbus A340-500,278
+346,Airbus A340-600,330
+350,Airbus A350,300
+380,Airbus A380,525
+717,Boeing 717,121
+727,Boeing 727,134
+721,Boeing 727-100,121
+722,Boeing 727-200,112
+737,Boeing 737,130
+732,Boeing 737-200,92
+733,Boeing 737-300,112
+734,Boeing 737-400,126
+735,Boeing 737-500,120
+736,Boeing 737-600,114
+73G,Boeing 737-700,212
+738,Boeing 737-800,185
+739,Boeing 737-900,209
+747,Boeing 747,366
+757,Boeing 757,200
+767,Boeing 767,216
+777,Boeing 777,301
+787,Boeing 787,269
+D8L,Douglas DC-8-62,189
+D95,Douglas DC-9-50,135
+E70,Embraer 170,72
+E75,Embraer 175,75
+E90,Embraer 190,124
+E95,Embraer 195,125
+FRJ,Fairchild Dornier 328JET,33
+M81,McDonnell Douglas MD-81,155
+M82,McDonnell Douglas MD-82,155
+M83,McDonnell Douglas MD-83,155
+M87,McDonnell Douglas MD-87,130
+M88,McDonnell Douglas MD-88,155
+M90,McDonnell Douglas MD-90,153
