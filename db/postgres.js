@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 // File Name: database.js
 // Airside - Tampa International Airport Database Management System
 // COP 4710 Database Design (Spring 2020)
@@ -10,16 +11,9 @@ const pool = new Pool({
   host: 'localhost',
   database: 'airsidedb',
   password: 'tampa_airport',
-  port: '5432',
-});
-
-pool.query('SELECT NOW()', (err, res) => {
-  console.log(err, res);
-  pool.end();
+  port: '5432'
 });
 
 module.exports = {
-  queryPassengers() {
-    console.log('query pass');
-  },
+  query: (text, params) => pool.query(text, params)
 };
