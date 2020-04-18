@@ -6,7 +6,9 @@ const router = Router();
 /* GET users info. */
 router.get('/:userId', async (req, res) => {
   const { userId } = req.params;
-  const { rows } = await db.query('SELECT * FROM users WHERE userid = $1', [
+  const {
+    rows
+  } = await db.query('SELECT * FROM passenger WHERE passengerid = $1', [
     userId
   ]);
   res.send(rows);
@@ -14,9 +16,16 @@ router.get('/:userId', async (req, res) => {
 });
 
 /* Get a list of user's flights */
-router.get('/:userId/flights/:flightId', (req, res) => {
+router.get('/:userId/flights/:flightId', async (req, res) => {
   const { flightId, userId } = req.params;
-  res.send(`Info about flight ${flightId} for passenger ${userId}`);
+  const { rows } = await db.query(
+    'SELECT * FROM passengers'
+    + ' INNER JOIN passengerflights ON passengers.passengerid = passengerflights.passengerid'
+    + ' INNER JOIN flightlogs ON passengerflights.flightId = flightlogs.flightId'
+    + ' WHERE passengers.passengerid = $1 AND flightlogs.flightId = $2',
+    [userId, flightId]
+  );
+  res.send(rows);
 });
 
 /* Get a list of user's flights */

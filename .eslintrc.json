@@ -14,7 +14,7 @@
     "sourceType": "module"
   },
   "rules": {
-    "comma-dangle": "off",
+    "comma-dangle": ["error", "never"],
     "linebreak-style": "off"
   }
 }
