@@ -15,55 +15,57 @@
   </head>
 
   <body>
-    <div class="wrapper fadeInDown">
-
-      <div id="page_title">
-      </div>
-      <div id="img_header">
-        <img src="airplane_clipart.png" alt="">
-      </div>
-      <div id="formContent">
-        <!-- Tabs Titles -->
-        <div id="formHeader">
-          <h3>Airport System Login</h3>
-        </div>
-
+    <div class="center-align">
+      <div class="container">
         <div class="row">
-          <form class="col s12">
-            <h1>Airside</h1>
-            <h4>Tampa International Airport's DBMS</h4>
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="loginInput" type="text" class="validate">
-                <label for="loginInput">Username</label>
-              </div>
+          <div class="col s6 offset-s3">
+            <div id="img_header">
+              <img src="airplane_clipart.png" alt="">
             </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="passwordInput" type="password" class="validate">
-                <label for="passwordInput">Password</label>
+            <div class="card white" id="formCard">
+              <!-- Tabs Titles -->
+              <div id="formHeader">
+                <h3>Airport System Login</h3>
               </div>
-            </div>
-            <div class="row">
-              <div clas="col s3">
-                <button class="btn waves-effect waves-light" type="button" name="loginBtn">Login
-                  <i class="material-icons right">send</i>
-                </button>
+              <div class="divider"></div>
+              <div class="row">
+                <form class="col s12">
+                  <h1 class="center-align">Airside</h1>
+                  <h4 class="center-align">Tampa International Airport's DBMS</h4>
+                  <div class="row">
+                    <div class="input-field col s10 offset-s1">
+                      <input id="loginInput" type="text" class="validate">
+                      <label for="loginInput">Username</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s10 offset-s1">
+                      <input id="passwordInput" type="password" class="validate">
+                      <label for="passwordInput">Password</label>
+                    </div>
+                  </div>
+                  <div class="row center-align">
+                    <div clas="col s3">
+                      <button class="btn waves-effect waves-light" type="button" name="loginBtn">Login
+                        <i class="material-icons right">send</i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
+
+              <div class="divider"></div>
+              <!-- Remind Passowrd -->
+              <div id="formFooter">
+                <a class="underlineHover" href="#">Forgot Password?</a>
+              </div>
+
             </div>
-          </form>
+          </div>
         </div>
-
-
-        <!-- Remind Passowrd -->
-        <div id="formFooter">
-          <a class="underlineHover" href="#">Forgot Password?</a>
-        </div>
-
       </div>
-    </div>
-    <script src="javascripts/materialize.min.js"></script>
-    <script src="javascripts/login.js"></script>
+      <script src="javascripts/materialize.min.js"></script>
+      <script src="javascripts/login.js"></script>
   </body>
 
 </html>
