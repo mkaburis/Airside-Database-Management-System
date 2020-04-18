@@ -1,10 +1,12 @@
-const express = require('express');
+// routes/index.js
+const flightsRouter = require('./flights');
+const passengerRouter = require('./passenger');
+const employeeRouter = require('./employee');
+const loginRouter = require('./login');
 
-const router = express.Router();
-
-/* GET home page. */
-router.get('/', (req, res) => {
-  res.send('Main');
-});
-
-module.exports = router;
+module.exports = (app) => {
+  app.use('/employee', employeeRouter);
+  app.use('/flights', flightsRouter);
+  app.use('/passenger', passengerRouter);
+  app.use('/login', loginRouter);
+};
