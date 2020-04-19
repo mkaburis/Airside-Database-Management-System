@@ -1,3 +1,10 @@
+function handleErrors(response) {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
+}
+
 function addRow(entry) {
   const tr = document.createElement('tr');
 
@@ -16,6 +23,10 @@ function addRow(entry) {
   isDelayed.classList.add('center-align');
 
   flightNo.innerText = entry.flightno;
+  departureTime.innerText = entry.departuretime;
+  arrivalTime.innerText = entry.arrivaltime;
+
+  isDelayed.innerText = entry.isdelayed ? 'On Time' : 'Delayed';
   departureLoc.innerText = entry.fliesfrom;
   arrivalLoc.innerText = entry.fliesto;
 
@@ -31,10 +42,17 @@ function addRow(entry) {
 
 function fillFlightsTable(list) {
   const tbody = document.getElementById('tBody');
+  const label = document.getElementById('noFlightsLabel');
   tbody.innerHTML = '';
 
-  list.forEach((element) => {
+  if (list === undefined || list.size === 0) {
+    label.style.display = 'block';
+    return;
+  }
+  label.style.display = 'none';
 
+
+  list.forEach((element) => {
     const tr = addRow(element);
     tbody.appendChild(tr);
   });
@@ -49,13 +67,16 @@ function searchForFlights() {
   const url = `../flights?flightNo=${flightNo}&departureAirport=${depatureAirport}&arrivalAirport=${arrivalAirport}`;
 
   fetch(url)
+    .then(handleErrors)
     .then((response) => response.json())
     .then((data) => {
       fillFlightsTable(data);
-    }).catch((error) => {
+    })
+    .catch((error) => {
       console.error('There has been a problem with your fetch operation:', error);
     });
 }
+
 
 function addEventListeners() {
   const searchButton = document.getElementById('searchButton');

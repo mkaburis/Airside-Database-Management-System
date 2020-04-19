@@ -9,3 +9,12 @@ body {
 #searchBtnWrapper{
     padding-top: 0.25rem;
 }
+
+#noFlightsLabel {
+    display: none;
+}
+
+#tableWrapper {
+    overflow-y: auto;
+    max-height: 30rem;
+}

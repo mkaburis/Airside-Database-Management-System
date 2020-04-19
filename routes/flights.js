@@ -19,15 +19,25 @@ router.get('/', async (req, res) => {
     departureAirport = '%';
   }
 
-  const query = 'SELECT * FROM routes WHERE flightno like $1 AND fliesto like $2 AND fliesfrom like $3';
+  /*
+    // For use in production
+    const today = new Date();
+    const day = 60 * 60 * 24 * 1000;
 
-  const {
-    rows
-  } = await db.query(query, [
+    const yesterday = new Date(today.getTime() - day);
+    const tommorow = new Date(today.getTime() + day);
+
+  */
+  const query = 'SELECT * FROM routes AS t1 LEFT JOIN flightlogs AS t2 ON t1.routeid '
+    + '= t2.routeid  WHERE flightno like $1 AND fliesto like $2 AND fliesfrom like $3 '
+    // + AND (departuretime > $4 AND arrivaltime < $5)';
+    + 'ORDER BY departuretime, arrivaltime';
+  const { rows } = await db.query(query, [
     flightNo, arrivalAirport, departureAirport
+    // flightNo, arrivalAirport, departureAirport, yesterday, tommorow
   ]);
   if (rows.length < 1) {
-    res.sendStatus(404).json({ error: 'No flights found' });
+    res.status(404).json({ error: 'No flights found' });
   } else {
     res.send(rows);
   }
