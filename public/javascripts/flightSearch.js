@@ -9,30 +9,42 @@ function addRow(entry) {
   const tr = document.createElement('tr');
 
   const flightNo = document.createElement('td');
-  const departureLoc = document.createElement('td');
-  const arrivalLoc = document.createElement('td');
+  const route = document.createElement('td');
+  const gate = document.createElement('td');
+  const date = document.createElement('td');
   const departureTime = document.createElement('td');
   const arrivalTime = document.createElement('td');
   const isDelayed = document.createElement('td');
 
   flightNo.classList.add('center-align');
-  departureLoc.classList.add('center-align');
-  arrivalLoc.classList.add('center-align');
+  route.classList.add('center-align');
+  gate.classList.add('center-align');
   departureTime.classList.add('center-align');
   arrivalTime.classList.add('center-align');
   isDelayed.classList.add('center-align');
 
-  flightNo.innerText = entry.flightno;
-  departureTime.innerText = entry.departuretime;
-  arrivalTime.innerText = entry.arrivaltime;
+  const arrivalDate = new Date(entry.arrivaltime);
+  const departureDate = new Date(entry.departuretime);
 
-  isDelayed.innerText = entry.isdelayed ? 'On Time' : 'Delayed';
-  departureLoc.innerText = entry.fliesfrom;
-  arrivalLoc.innerText = entry.fliesto;
+  flightNo.innerText = entry.flightno;
+  date.innerText = arrivalDate.toLocaleDateString();
+  departureTime.innerText = arrivalDate.toLocaleTimeString();
+  arrivalTime.innerText = departureDate.toLocaleTimeString();
+
+  isDelayed.innerText = entry.isdelayed ? 'Delayed' : 'On Time';
+  route.innerText = `${entry.fliesfrom} - ${entry.fliesto}`;
+  gate.innerText = entry.gateno;
+
+  if (entry.isdelayed) {
+    isDelayed.style.color = 'red';
+  } else {
+    isDelayed.style.color = 'green';
+  }
 
   tr.appendChild(flightNo);
-  tr.appendChild(departureLoc);
-  tr.appendChild(arrivalLoc);
+  tr.appendChild(route);
+  tr.appendChild(gate);
+  tr.appendChild(date);
   tr.appendChild(departureTime);
   tr.appendChild(arrivalTime);
   tr.appendChild(isDelayed);
