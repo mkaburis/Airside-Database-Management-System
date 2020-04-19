@@ -22,6 +22,8 @@ CREATE DATABASE airsidedb WITH
 CREATE TABLE Users(UserID SERIAL PRIMARY KEY, UserName VARCHAR(20), Password VARCHAR(60),
 Permission INTEGER);
 
+CREATE TABLE Airlines(AirlineCode VARCHAR(2) PRIMARY KEY, AirlineName TEXT);
+
 CREATE TABLE Planes(AircraftID VARCHAR(3) PRIMARY KEY, PlaneName TEXT, SeatingCapacity INTEGER);
 
 CREATE TABLE Concourses(GateNo VARCHAR(3) PRIMARY KEY, Airside VARCHAR(1));
@@ -29,15 +31,16 @@ CREATE TABLE Concourses(GateNo VARCHAR(3) PRIMARY KEY, Airside VARCHAR(1));
 CREATE TABLE Destinations(AirportCode VARCHAR(3) PRIMARY KEY, AirportName TEXT, City TEXT, 
 AdministrativeDivision TEXT, Country TEXT);
 
-CREATE TABLE Routes(RouteID SERIAL PRIMARY KEY, FlightNo VARCHAR(10), IsActive BOOLEAN, FliesTo VARCHAR(3) 
-REFERENCES Destinations NOT NULL, FliesFrom VARCHAR(3) REFERENCES Destinations NOT NULL);
+CREATE TABLE Routes(RouteID SERIAL PRIMARY KEY, AirlineCode VARCHAR(2) REFERENCES Airlines NOT NULL,
+FlightNo VARCHAR(10), IsActive BOOLEAN, FliesTo VARCHAR(3) REFERENCES Destinations NOT NULL, 
+FliesFrom VARCHAR(3) REFERENCES Destinations NOT NULL);
 
 CREATE TABLE Passengers(PassengerID SERIAL PRIMARY KEY, FirstName VARCHAR(50), LastName VARCHAR(50),
-DOB DATE, DLNo VARCHAR(50) NULL UNIQUE, PassportNo VARCHAR(50) NULL UNIQUE, Nationality VARCHAR(50),
-TSAPre BOOLEAN, AirportCode VARCHAR(3) REFERENCES Destinations NOT NULL);
+DOB DATE, Nationality VARCHAR(50), DLNo VARCHAR(50) UNIQUE, PassportNo VARCHAR(50) UNIQUE,
+TSAPre BOOLEAN, HomeAirport VARCHAR(3) REFERENCES Destinations NOT NULL);
 
 CREATE TABLE FlightLogs(FlightID SERIAL PRIMARY KEY, DepartureTime TIMESTAMP(0), 
-ArrivalTime TIMESTAMP(0) NULL, Airline VARCHAR(20), GateNo VARCHAR(3) REFERENCES Concourses NOT NULL, 
+ArrivalTime TIMESTAMP(0) NULL, GateNo VARCHAR(3) REFERENCES Concourses NOT NULL, 
 IsDelayed BOOLEAN, AircraftID VARCHAR(3) REFERENCES Planes NOT NULL, RouteID SERIAL REFERENCES Routes NOT NULL);
 
 CREATE TABLE PassengerFlights(FlightID SERIAL REFERENCES FlightLogs(FlightID) NOT NULL, PassengerID SERIAL
@@ -45,7 +48,17 @@ REFERENCES Passengers(PassengerID) NOT NULL, CheckedIn BOOLEAN, Connecting BOOLE
 
 -- Copy .csv files
 \copy Planes(AircraftID, PlaneName, SeatingCapacity) FROM 'planes.csv' WITH DELIMITER ',' CSV HEADER;
-\copy Concourses(GateNo, Airside) FROM 'concourses.csv' WITH DELIMITER ',' CSV HEADER;
-\copy Destinations(AirportCode, AirportName, City, AdministrativeDivision, Country) FROM 'destinations.csv' WITH DELIMITER ',' CSV HEADER;
-\copy Routes(RouteID, FlightNo, IsActive, FliesTo, FliesFrom) FROM 'routes.csv' WITH DELIMITER ',' CSV HEADER;
 
+\copy Airlines(AirlineCode, AirlineName) FROM 'airlines.csv' WITH DELIMITER ',' CSV HEADER;
+
+\copy Concourses(GateNo, Airside) FROM 'concourses.csv' WITH DELIMITER ',' CSV HEADER;
+
+\copy Destinations(AirportCode, AirportName, City, AdministrativeDivision, Country) FROM 'destinations.csv' WITH DELIMITER ',' CSV HEADER;
+
+\copy Routes(RouteID, AirlineCode, FlightNo, IsActive, FliesTo, FliesFrom) FROM 'routes.csv' WITH DELIMITER ',' CSV HEADER;
+
+\copy Passengers(PassengerID, FirstName, LastName, DOB, Nationality, DLNo, PassportNo, TSAPre, HomeAirport) FROM 'passengers.csv' WITH DELIMITER ',' NULL AS 'NULL' CSV HEADER;
+
+\copy FlightLogs(FlightID, DepartureTime, ArrivalTime, GateNo, IsDelayed, AircraftID, RouteID) FROM 'flightlogs.csv' WITH DELIMITER ',' CSV HEADER;
+
+\copy PassengerFlights(FlightID, PassengerID, CheckedIn, Connecting) FROM 'passengerflights.csv' WITH DELIMITER ',' CSV HEADER;
