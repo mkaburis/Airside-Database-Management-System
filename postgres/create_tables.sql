@@ -3,6 +3,8 @@
 *  COP 4710 - Database Design (Spring 2020)
 *  Mihail Kaburis, Jose-Pablo Mantilla, Jody Rutter
 *  NOTE: Run these commands using psql since this is database creation!
+*  On WindowsOS ensure PATH variable is set up for postgreSQL
+*  Command to run sql script \i create_tables.sql
 */
 
 -- Establish user account
@@ -17,6 +19,9 @@ CREATE DATABASE airsidedb WITH
 
 -- CONNECT to database
 \c airsidedb
+
+-- Ensure database is configured for 'UTF8' file format
+SET client_encoding TO 'utf8';
 
 -- Setup the tables
 CREATE TABLE Users(UserID SERIAL PRIMARY KEY, UserName VARCHAR(20), Password VARCHAR(60),
