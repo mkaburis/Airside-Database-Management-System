@@ -1,0 +1,11 @@
+body {
+    background-color: #56baed !important;
+}
+
+.noBottomMargin{
+    margin-bottom: 0;
+}
+
+#searchBtnWrapper{
+    padding-top: 0.25rem;
+}

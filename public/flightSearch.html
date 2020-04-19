@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link href="stylesheets/materialize.min.css" rel="stylesheet" />
+
+        <link href="stylesheets/flightSearch.css" rel="stylesheet" />
+    </head>
+
+    <body>
+        <div class="center-align">
+            <div class="container">
+                <div class="row">
+                    <div class="col m8 offset-m2">
+                        <div class="card white darken-1">
+                            <div class="card-content">
+                                <span class="card-title">Search for Fights</span>
+                            </div>
+                            <div class="card-action">
+                                <div class="row notBottomMargin">
+                                    <form class="col s12">
+                                        <div class="row">
+                                            <div class="input-field col m3">
+                                                <input id="flightNo" type="text" maxlen="10">
+                                                <label for="flightNo">Flight Number</label>
+                                            </div>
+
+                                            <div class="input-field col m3">
+                                                <input id="depatureAirport" type="text" maxlen="3">
+                                                <label for="depatureAirport">Departure Airport</label>
+                                            </div>
+                                            <div class="input-field col m3">
+                                                <input id="arrivalAirport" type="text" maxlen="3">
+                                                <label for="arrivalAirport">Arrival Airport</label>
+                                            </div>
+                                            <div class="input-field col right" id="searchBtnWrapper">
+                                                <button class="btn waves-effect waves-light" type="button"
+                                                    id="searchButton">Search
+                                                    <i class="material-icons right">search</i>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col m8 offset-m2">
+                        <div class="card-panel white">
+                            <table>
+                                <thead>
+                                    <th scope="col">Flight Number</th>
+                                    <th scope="col">Departure Location</th>
+                                    <th scope="col">Arrival Location</th>
+                                    <th scope="col">Departure Time</th>
+                                    <th scope="col">Arrival Time</th>
+                                    <th scope="col">Status</th>
+                                </thead>
+                                <tbody id="tBody">
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="javascripts/materialize.min.js"></script>
+        <script src="javascripts/flights.js"></script>
+    </body>
+
+</html>
