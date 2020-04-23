@@ -37,6 +37,16 @@ html {
     border-radius: inherit;
   }
 
+  #usernameSpan {
+    color: red;
+    display: none;
+  }
+
+  #passwordSpan {
+    color: red;
+    display: none;
+  }
+
   /* ANIMATIONS */
 
   /* Simple CSS3 Fade-in-down Animation */

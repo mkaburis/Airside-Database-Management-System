@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const db = require('../db/postgres');
 
 const text = 'SELECT * FROM routes WHERE fliesto = $1 AND fliesfrom = $2';
