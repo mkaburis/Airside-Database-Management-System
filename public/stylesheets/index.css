@@ -1,0 +1,42 @@
+body {
+    background-color: whitesmoke  !important;
+}
+
+.logo {
+    display: inline-block;
+    height: 100%;
+}
+
+.logo>img {
+    vertical-align: middle;
+    margin-left: 7px;
+    margin-right: 10px;
+}
+
+
+.nav-wrapper {
+    /* background-color: #757575 ; */
+    background: white;
+}
+
+.btn {
+    border-radius: 8px;
+}
+
+.card-content > span {
+    color: white;
+}
+
+
+.noBottomMargin{
+    margin-bottom: 0;
+}
+
+#searchBtnWrapper{
+    padding-top: 0.25rem;
+}
+
+#tableWrapper {
+    overflow-y: auto;
+    max-height: 30rem;
+}

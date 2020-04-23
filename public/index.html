@@ -1,16 +1,98 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <title>
-            Database Project
-        </title>
-    </head>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link href="stylesheets/materialize.min.css" rel="stylesheet" />
 
-    <body>
-        <h1>
-            Hello
-        </h1>
-    </body>
+    <link href="stylesheets/index.css" rel="stylesheet" />
+</head>
+
+
+<header>
+    <nav>
+        <div class="nav-wrapper black-text">
+            <a href="#" class="logo">
+                <img src="images/tpa_logo_nav.png" /></a>
+            <a href="#" class="brand-logo black-text">Airside</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="login.html" class="black-text"><i class="material-icons left">vpn_key</i>Login</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<body>
+    <div class="center-align">
+        <div class="container">
+            <div class="row">
+                <div class="col m8 offset-m2">
+                    <div class="card white darken-1">
+
+                        <div class="card-content light-blue darken-1">
+                            <span class="card-title">Search for Fights</span>
+                        </div>
+                        <div class="card-action">
+                            <div class="row notBottomMargin">
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s4">
+                                            <input id="flightNo" type="text" maxlen="10">
+                                            <label for="flightNo">Flight Number</label>
+                                        </div>
+
+                                        <div class="input-field col s4">
+                                            <input id="depatureAirport" type="text" maxlen="3">
+                                            <label for="depatureAirport">Origin</label>
+                                        </div>
+                                        <div class="input-field col s4">
+                                            <input id="arrivalAirport" type="text" maxlen="3">
+                                            <label for="arrivalAirport">Destination</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <button class="btn waves-effect waves-light light-blue accent-4" type="button"
+                                        id="searchButton">Search<i class="material-icons right">search</i>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col m10 offset-m1">
+                    <div class="card-panel white" id="tableWrapper">
+                        <table class="highlight centered">
+                            <thead>
+                                <th class="center-align" scope="col">Flight Number</th>
+                                <th class="center-align" scope="col">Route</th>
+                                <th class="center-align" scope="col">Gate</th>
+                                <th class="center-align" scope="col">Date</th>
+                                <th class="center-align" scope="col">Departure Time</th>
+                                <th class="center-align" scope="col">Arrival Time</th>
+                                <th class="center-align" scope="col">Status</th>
+                            </thead>
+                            <tbody id="tBody">
+                            </tbody>
+                        </table>
+                        <div class="section"></div>
+                        <span id='noFlightsLabel'>No flights found</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascripts/materialize.min.js"></script>
+    <script src="javascripts/flightSearch.js"></script>
+</body>
 
 </html>
