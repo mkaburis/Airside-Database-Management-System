@@ -1,16 +1,19 @@
 const { Router } = require('express');
-const passport = require('passport');
 const db = require('../db/postgres');
 
 const router = Router();
 
 /* GET users info. */
 router.get('/:userId', async (req, res) => {
-  passport.authenticate('local', { failureRedirect: '/login' });
+  if (!req.isAuthenticated()) {
+    res.redirect('../../login.html');
+    return;
+  }
+
   const { userId } = req.params;
   const {
     rows
-  } = await db.query('SELECT * FROM passenger WHERE passengerid = $1', [
+  } = await db.query('SELECT * FROM passengers WHERE passengerid = $1', [
     userId
   ]);
   if (rows.length < 1) {
