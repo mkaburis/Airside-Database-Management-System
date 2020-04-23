@@ -1,12 +1,12 @@
 const express = require('express');
-const path = require('path');
+const passport = require('passport');
+
+const user = require('../auth/user');
 
 const router = express.Router();
 
-/* GET users info. */
-router.get('/', (req, res) => {
-  const filePath = path.resolve(__dirname, '../public/login.html');
-  res.sendFile(filePath);
-});
+router.post('/login', passport.authenticate('local'), user.login);
+
+router.post('/logout', user.logout);
 
 module.exports = router;
