@@ -76,7 +76,7 @@ function searchForFlights() {
   const arrivalAirport = document.getElementById('arrivalAirport').value;
 
 
-  const url = `../flights?flightNo=${flightNo}&departureAirport=${depatureAirport}&arrivalAirport=${arrivalAirport}`;
+  const url = `../api/flights?flightNo=${flightNo}&departureAirport=${depatureAirport}&arrivalAirport=${arrivalAirport}`;
 
   fetch(url)
     .then(handleErrors)
