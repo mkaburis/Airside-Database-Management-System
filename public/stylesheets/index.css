@@ -9,8 +9,8 @@ body {
 
 .logo>img {
     vertical-align: middle;
-    margin-left: 7px;
-    margin-right: 10px;
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
 }
 
 
@@ -20,7 +20,7 @@ body {
 }
 
 .btn {
-    border-radius: 8px;
+    border-radius: 0.4rem;
 }
 
 .card-content > span {
@@ -30,6 +30,10 @@ body {
 
 .noBottomMargin{
     margin-bottom: 0;
+}
+
+.header-nav-bar{
+    margin-bottom: 1rem;
 }
 
 #searchBtnWrapper{
