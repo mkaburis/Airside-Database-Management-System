@@ -10,7 +10,11 @@ const routeList = require('./routes');
 
 const app = express();
 app.use(logger('dev', { immediate: true }));
-app.use(session({ secret: 'airport813' }));
+app.use(session({
+  secret: 'airport813',
+  resave: false,
+  saveUninitialized: false
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
