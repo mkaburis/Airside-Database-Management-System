@@ -18,9 +18,11 @@ function login() {
     passwordSpan.style.display = 'none';
   }
 
-  const url = `../api/login?username=${loginVal}&password=${passwordVal}`;
+  const url = `../api/auth/login?username=${loginVal}&password=${passwordVal}`;
 
-  fetch(url)
+  fetch(url, {
+    method: 'POST'
+  })
     .then((response) => response.json())
     .finally((data) => {
       console.log(data);

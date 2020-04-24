@@ -5,11 +5,16 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport');
 const session = require('express-session');
+const flash = require('express-flash');
 
 const routeList = require('./routes');
+const initializePassport = require('./auth/auth');
+
+initializePassport(passport);
 
 const app = express();
 app.use(logger('dev', { immediate: true }));
+app.use(flash());
 app.use(session({
   secret: 'airport813',
   resave: false,
