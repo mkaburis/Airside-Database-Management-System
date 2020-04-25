@@ -10,6 +10,32 @@ async function getUserByUsername(username) {
     .then((res) => res.rows[0])
     .catch((err) => console.error(err.stack));
 
+  if (result === undefined) {
+    return null;
+  }
+
+  const user = {
+    id: result.userid,
+    username: result.username,
+    password: result.password,
+    permission: result.permission
+  };
+
+  return user;
+}
+
+async function getUserById(id) {
+  const result = await db.query(
+    'SELECT userid, username, password, permission FROM users WHERE userid=$1',
+    [id]
+  )
+    .then((res) => res.rows[0])
+    .catch((err) => console.error(err.stack));
+
+  if (result === undefined) {
+    return null;
+  }
+
   const user = {
     id: result.userid,
     username: result.username,
@@ -41,11 +67,13 @@ async function initialize(passport) {
   passport.use(new LocalStrategy(authenticatUser));
 
   passport.serializeUser((user, done) => {
-
+    done(null, user.id);
   });
 
   passport.deserializeUser((id, done) => {
-
+    getUserById(id, (err, user) => {
+      done(err, user);
+    });
   });
 }
 

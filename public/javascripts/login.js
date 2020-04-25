@@ -21,12 +21,9 @@ function login() {
   const url = `../api/auth/login?username=${loginVal}&password=${passwordVal}`;
 
   fetch(url, {
-    method: 'POST'
-  })
-    .then((response) => response.json())
-    .finally((data) => {
-      console.log(data);
-    });
+    method: 'POST',
+    redirect: 'manual'
+  }).then((response) => console.log(response));
 }
 
 function addEventListeners() {
