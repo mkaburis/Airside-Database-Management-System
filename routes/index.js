@@ -4,8 +4,10 @@ const passengerRouter = require('./passenger');
 const employeeRouter = require('./employee');
 const loginRouter = require('./login');
 const staffDashRouter = require('./staffDashboard');
+const pageRoutesRouter = require('./pageRoutes');
 
 module.exports = (app) => {
+  app.use('/', pageRoutesRouter);
   app.use('/api/employee', employeeRouter);
   app.use('/api/flights', flightsRouter);
   app.use('/api/passenger', passengerRouter);
