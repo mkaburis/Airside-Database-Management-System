@@ -26,7 +26,7 @@ function addRow(entry) {
   const arrivalDate = new Date(entry.arrivaltime);
   const departureDate = new Date(entry.departuretime);
 
-  flightNo.innerText = entry.flightno;
+  flightNo.innerText = `${entry.airlinecode} ${entry.flightno}`;
   date.innerText = arrivalDate.toLocaleDateString();
   departureTime.innerText = arrivalDate.toLocaleTimeString();
   arrivalTime.innerText = departureDate.toLocaleTimeString();
@@ -97,6 +97,6 @@ function addEventListeners() {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', () => {
   addEventListeners();
 }, false);

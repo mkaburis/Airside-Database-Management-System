@@ -3,13 +3,30 @@ const db = require('../db/postgres');
 
 const router = express.Router();
 
+function extractFlightNo(flightNo) {
+
+  const reAirline = /\d*[a-zA-Z]+\d*/;
+  const reFlight = /\d{2,}/;
+  const airline = reAirline.exec(flightNo);
+  const flightNum = reFlight.exec(flightNo);
+
+  return {
+    airline: airline != null ? airline[0] : null,
+    flightNum: flightNum != null ? flightNum[0] : null
+  };
+}
+
 /* GET flight listing. */
 /* Will add query parameters later */
 router.get('/', async (req, res) => {
   let { flightNo, departureAirport, arrivalAirport } = req.query;
 
-  if (flightNo === '') {
-    flightNo = '%';
+  let { airline, flightNum } = extractFlightNo(flightNo);
+  if (airline === null) {
+    airline = '%';
+  }
+  if (flightNum === null) {
+    flightNum = '%';
   }
   if (arrivalAirport === '') {
     arrivalAirport = '%';
@@ -29,12 +46,12 @@ router.get('/', async (req, res) => {
 
   */
   const query = 'SELECT * FROM routes AS t1 LEFT JOIN flightlogs AS t2 ON t1.routeid '
-    + '= t2.routeid  WHERE flightno like $1 AND fliesto like $2 AND fliesfrom like $3 '
-    // + 'AND (departuretime > $4 AND arrivaltime < $5)'
+    + '= t2.routeid  WHERE flightno like $1 AND fliesto like $2 AND fliesfrom like $3 AND airlinecode like $4'
+    // + 'AND (departuretime > $5 AND arrivaltime < $6)'
     + 'ORDER BY departuretime, arrivaltime';
   const { rows } = await db.query(query, [
-    flightNo, arrivalAirport, departureAirport
-    // flightNo, arrivalAirport, departureAirport, yesterday, tommorow
+    flightNum, arrivalAirport, departureAirport, airline
+    // flightNo, arrivalAirport, departureAirport, airline, yesterday, tommorow
   ]);
   if (rows.length < 1) {
     res.status(404).json({ error: 'No flights found' });
