@@ -1,6 +1,5 @@
 const express = require('express');
 const passport = require('passport');
-const path = require('path');
 
 const router = express.Router();
 
@@ -19,7 +18,7 @@ router.post('/login', (req, res, next) => {
     authorizedRedirect(req.user);
   }
 
-  passport.authenticate('local', (error, user, info) => {
+  passport.authenticate('local', (error, user) => {
     if (error) {
       return next(error);
     }
@@ -31,7 +30,7 @@ router.post('/login', (req, res, next) => {
 
       const dashboardPath = authorizedRedirect(user);
 
-      res.redirect(301, dashboardPath);
+      return res.redirect(301, dashboardPath);
     });
     return res;
   })(req, res, next);
