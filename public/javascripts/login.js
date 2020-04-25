@@ -29,8 +29,9 @@ function login() {
       if (response.auth === true) {
         window.location.href = response.dashUrl;
       }
-    });
+    }).catch((err) => console.log(err));
 }
+
 function addEventListeners() {
   const loginBtn = document.getElementById('loginBtn');
 

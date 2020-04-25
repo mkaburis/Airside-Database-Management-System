@@ -1,16 +1,11 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const passport = require('passport');
 const session = require('express-session');
 const flash = require('express-flash');
 
 const routeList = require('./routes');
-const initializePassport = require('./auth/auth');
-
-initializePassport(passport);
 
 const app = express();
 app.use(logger('dev', { immediate: true }));
@@ -22,9 +17,6 @@ app.use(session({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 routeList(app);

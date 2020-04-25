@@ -11,3 +11,8 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
+#logOutButton{
+    background-color: inherit;
+    border: none;
+}

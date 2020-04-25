@@ -1,5 +1,6 @@
 const express = require('express');
-const passport = require('passport');
+
+const { authenticateUser } = require('../models/user');
 
 const router = express.Router();
 
@@ -13,33 +14,28 @@ function authorizedRedirect(user) {
   return '/staffDashboard.html';
 }
 
-router.post('/login', (req, res, next) => {
-  if (req.isAuthenticated()) {
-    authorizedRedirect(req.user);
+router.post('/login', async (req, res) => {
+  if (req.session.user != null) {
+    const { user } = req.session;
+    const dashboardPath = authorizedRedirect(user);
+    return res.json({ dashUrl: dashboardPath, auth: true });
   }
 
-  passport.authenticate('local', (error, user) => {
-    if (error) {
-      return next(error);
-    }
-    if (!user) {
-      return res.redirect('/login');
-    }
-    let dashboardPath;
-    req.logIn(user, (err) => {
-      if (err) { return next(err); }
+  const { username, password } = req.query;
 
-      dashboardPath = authorizedRedirect(user);
-      return res;
-    });
-    req.session.save();
-    console.log(req.session);
-    return res.json({ dashUrl: dashboardPath, auth: true });
-  })(req, res, next);
+  const { user, message } = await authenticateUser(username, password);
+  if (user == null) {
+    return res.status(404).json({ message });
+  }
+  req.session.user = user;
+  req.session.loggedin = true;
+  const dashboardPath = authorizedRedirect(user);
+  return res.json({ dashUrl: dashboardPath, auth: true });
 });
 
 router.post('/logout', (req, res) => {
-  req.logout();
+  req.session.user = null;
+  req.session.loggedin = false;
   res.redirect('/login.html');
 });
 
