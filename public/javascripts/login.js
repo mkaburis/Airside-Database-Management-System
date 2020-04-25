@@ -24,8 +24,11 @@ function login() {
     method: 'POST',
     redirect: 'follow'
   })
+    .then((response) => response.json())
     .then((response) => {
-      console.log(response);
+      if (response.auth === true) {
+        window.location.href = response.dashUrl;
+      }
     });
 }
 function addEventListeners() {

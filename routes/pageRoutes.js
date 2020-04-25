@@ -12,11 +12,11 @@ router.get('/staffDashboard', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  res.sendfile(path.resolve(path, '../public/login.html'));
+  res.sendfile(path.resolve(__dirname, '../public/login.html'));
 });
 
 router.get('/flightSearch', (req, res) => {
-  res.sendfile(path.resolve(path, '../public/index.html'));
+  res.sendfile(path.resolve(__dirname, '../public/index.html'));
 });
 
 module.exports = router;

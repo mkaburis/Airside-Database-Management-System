@@ -25,14 +25,16 @@ router.post('/login', (req, res, next) => {
     if (!user) {
       return res.redirect('/login');
     }
+    let dashboardPath;
     req.logIn(user, (err) => {
       if (err) { return next(err); }
 
-      const dashboardPath = authorizedRedirect(user);
-
-      return res.redirect(301, dashboardPath);
+      dashboardPath = authorizedRedirect(user);
+      return res;
     });
-    return res;
+    req.session.save();
+    console.log(req.session);
+    return res.json({ dashUrl: dashboardPath, auth: true });
   })(req, res, next);
 });
 
