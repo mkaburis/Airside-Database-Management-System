@@ -2,11 +2,11 @@
 /* BASIC */
 
 html {
-    background-color: white  !important;
+    background-color: whitesmoke  !important;
   }
 
   body {
-    background-color: white  !important;
+    background-color: whitesmoke  !important;
   }
 
   a {
@@ -35,7 +35,7 @@ html {
   }
 
   #formHeader {
-    background-color: #f6f6f6;
+    background-color: white;
     border-bottom: 0.1rem solid #dce8f1;
     padding: 1.5625rem;
     text-align: center;
@@ -45,7 +45,7 @@ html {
   }
 
   #formFooter {
-    background-color: #f6f6f6;
+    background-color: white;
     border-top: 0.1rem solid #dce8f1;
     padding: 1.5625rem;
     text-align: center;
