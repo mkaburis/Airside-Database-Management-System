@@ -22,10 +22,12 @@ function login() {
 
   fetch(url, {
     method: 'POST',
-    redirect: 'manual'
-  }).then((response) => console.log(response));
+    redirect: 'follow'
+  })
+    .then((response) => {
+      console.log(response);
+    });
 }
-
 function addEventListeners() {
   const loginBtn = document.getElementById('loginBtn');
 

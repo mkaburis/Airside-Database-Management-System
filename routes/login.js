@@ -4,7 +4,21 @@ const path = require('path');
 
 const router = express.Router();
 
+function authorizedRedirect(user) {
+  if (user.permission === 1) {
+    return '/passengerDashboard.html';
+  }
+  if (user.permission === 5) {
+    return '/adminDashboard.html';
+  }
+  return '/staffDashboard.html';
+}
+
 router.post('/login', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    authorizedRedirect(req.user);
+  }
+
   passport.authenticate('local', (error, user, info) => {
     if (error) {
       return next(error);
@@ -15,15 +29,11 @@ router.post('/login', (req, res, next) => {
     req.logIn(user, (err) => {
       if (err) { return next(err); }
 
-      if (user.permission === 1) {
-        return res.redirect('/passengerDashboard.html');
-      }
-      if (user.permission === 5) {
-        return res.redirect('/adminDashboard.html');
-      }
-      const pash = path.resolve(__dirname, '../public/staffDashboard.html');
-      return res.redirect('/staffDashboard');
+      const dashboardPath = authorizedRedirect(user);
+
+      res.redirect(301, dashboardPath);
     });
+    return res;
   })(req, res, next);
 });
 
