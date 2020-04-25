@@ -62,8 +62,22 @@ async function addPassenger(passenger) {
 
 async function editPassenger(id, field, value) {
   const result = await db.query(
-    `UPDATE passengers SET ${field}=$1; WHERE passengerid=$2;`,
+    `UPDATE passengers SET ${field}=$1 WHERE passengerid=$2;`,
     [value, id]
+  )
+    .catch((err) => console.error(err.stack));
+
+  if (result === undefined) {
+    return false;
+  }
+
+  return true;
+}
+
+async function deletePassenger(id) {
+  const result = await db.query(
+    `DELETE FROM passengers WHERE passengerid=$1;`,
+    [id]
   )
     .catch((err) => console.error(err.stack));
 
