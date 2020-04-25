@@ -1,7 +1,71 @@
+body {
+    background-color: whitesmoke  !important;
+}
+nav {
+    position: fixed;
+    z-index: 99999;
+  }
 
 .nav-wrapper {
-    background-color: #388e3c;
+    background-color: white;
 }
+
+/* .logo {
+    display: inline-block;
+    height: 50%;
+}
+
+.logo>img {
+    vertical-align: middle;
+    margin-left: 7px;
+    margin-right: 10px;
+} */
+
+.brand-logo{
+
+    display: inline-block;
+    height: 100%;
+
+}
+
+.brand-logo>img {
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+i.icon-black {
+    color:black;
+}
+
+.header-title img {
+    float: left;
+}
+
+
+.tabs .tab a:hover {
+    background-color:white;
+    color: black;
+} 
+
+.tabs .tab a.active {
+    background-color:#0288d1;
+    color: white;
+} /*Background and text color when a tab is active*/
+
+.tabs .tab a{
+    color:white;
+}
+
+.tabs .indicator{
+    background-color:white;/*your color*/
+    }
+
+.tabs {
+    background-color: #039be5;
+}
+
 
 .container {
     display: block;
@@ -16,3 +80,8 @@
     background-color: inherit;
     border: none;
 }
+
+.body {
+    position:relative;
+    top:150px;
+  }

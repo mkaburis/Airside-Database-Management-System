@@ -9,8 +9,9 @@ body {
 
 .logo>img {
     vertical-align: middle;
-    margin-left: 0.6rem;
-    margin-right: 0.6rem;
+    margin-left: 15px;
+    margin-right: 10px;
+    margin-bottom: 5px;
 }
 
 
