@@ -4,7 +4,6 @@ const db = require('../db/postgres');
 const router = express.Router();
 
 function extractFlightNo(flightNo) {
-
   const reAirline = /\d*[a-zA-Z]+\d*/;
   const reFlight = /\d{2,}/;
   const airline = reAirline.exec(flightNo);
