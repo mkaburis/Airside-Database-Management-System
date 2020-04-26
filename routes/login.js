@@ -39,4 +39,14 @@ router.post('/logout', (req, res) => {
   res.redirect('/login.html');
 });
 
+router.post('/profile', async (req, res) => {
+  const { username, password } = req.query;
+
+  const { user } = await authenticateUser(username, password);
+
+  req.session.user = user;
+  req.session.loggedin = true;
+  res.redirect('/profile.html');
+});
+
 module.exports = router;

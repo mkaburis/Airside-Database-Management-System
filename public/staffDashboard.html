@@ -1,149 +1,156 @@
 <!DOCTYPE html>
 <html>
 
-<title>
-Staff Dashboard
-</title>
+    <title>
+        Staff Dashboard
+    </title>
 
-<head>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link href="stylesheets/materialize.min.css" rel="stylesheet" />
+    <head>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link href="stylesheets/materialize.min.css" rel="stylesheet" />
 
-    <link href="stylesheets/staffDashboard.css" rel="stylesheet" />
-</head>
+        <link href="stylesheets/staffDashboard.css" rel="stylesheet" />
+    </head>
 
-<body>
-<header>
-    <nav class="nav-extended">
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo center black-text"><img class="left" src="images/tpa_logo_nav.jpeg" />Airside
-                Staff Dashboard</a>
+    <body>
+        <header>
+            <nav class="nav-extended">
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo center black-text"><img class="left"
+                            src="images/tpa_logo_nav.jpeg" />Airside
+                        Staff Dashboard</a>
 
-            <ul id="nav-mobile" class="left hide-on-med-and-down">
-                <li><a class="black-text" href="#">User</a></li>
-            </ul>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <!-- <li><button type="button" id='logOutButton'><i class="material-icons">exit_to_app</i></a> -->
-                <li><a class="black-text" id='logOutButton'><i class="large material-icons">exit_to_app</i></a></li>
-            </ul>
-        </div>
+                    <ul id="nav-mobile" class="left hide-on-med-and-down">
+                        <li><a href="profile.html" class="black-text" id='profileButton'>User</a></li>
+                    </ul>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a id='logOutButton' class="black-text"><i class="material-icons">exit_to_app</i></a></li>
+                    </ul>
+                </div>
 
-        <div class="nav-content">
-            <ul class="tabs tabs-fixed-width">
-                <li class="tab"><a class="active" href="#passengers">Passengers</a></li>
-                <li class="tab"><a href="#flights">Flights</a></li>
-            </ul>
-        </div>
-    </nav>
-</header>
+                <div class="nav-content">
+                    <ul class="tabs tabs-fixed-width">
+                        <li class="tab"><a class="active" href="#passengers">Passengers</a></li>
+                        <li class="tab"><a href="#flights">Flights</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
 
-    <div class="body">
+        <div class="body">
 
-        <div id="passengers">
+            <div id="passengers">
 
-            <div class="row">
-                <div class="col m10 offset-m1">
-                    <div class="card horizontal">
-                        <div class="valign-wrapper">
-                            <!-- <i class="large material-icons left center">airline_seat_recline_extra</i> -->
-                            <img src="images/add_delete_passenger_icon.jpeg">
-                        </div>
-                        <div class="card-stacked">
-                            <div class="card-content">
-                                <span class="card-title activator grey-text text-darken-4 center-align">Manage Passengers</span>
-            
+                <div class="row">
+                    <div class="col m10 offset-m1">
+                        <div class="card horizontal">
+                            <div class="valign-wrapper">
+                                <!-- <i class="large material-icons left center">airline_seat_recline_extra</i> -->
+                                <img src="images/add_delete_passenger_icon.jpeg">
                             </div>
-                            <div class="card-action">
-                                <p class="text-darken-4"><em>Add, update, and delete passengers in the database. May search/update
-                                        by attributes of passenger ID, first name, last name, data of birth, passport number,
-                                        driver's license number, and home airport.</em>
-                                </p>
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4 center-align">Manage
+                                        Passengers</span>
+
+                                </div>
+                                <div class="card-action">
+                                    <p class="text-darken-4"><em>Add, update, and delete passengers in the database. May
+                                            search/update
+                                            by attributes of passenger ID, first name, last name, data of birth,
+                                            passport number,
+                                            driver's license number, and home airport.</em>
+                                    </p>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-            
+                </div>
+
+                <div class="row">
+                    <div class="col m10 offset-m1">
+                        <div class="card horizontal">
+                            <div class="valign-wrapper">
+                                <!-- <i class="large material-icons left center">airline_seat_recline_extra</i> -->
+                                <img src="images/passenger_flights.jpeg">
+                            </div>
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4 center-align">Passenger
+                                        Flight Information Lookup</span>
+
+                                </div>
+                                <div class="card-action">
+                                    <p class="text-darken-4"><em>Search if a passenger is checked-in, connecting, and
+                                            what flight(s) they are associated with.</em>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col m10 offset-m1">
-                    <div class="card horizontal">
-                        <div class="valign-wrapper">
-                            <!-- <i class="large material-icons left center">airline_seat_recline_extra</i> -->
-                            <img src="images/passenger_flights.jpeg">
-                        </div>
-                        <div class="card-stacked">
-                            <div class="card-content">
-                                <span class="card-title activator grey-text text-darken-4 center-align">Passenger Flight Information Lookup</span>
-            
+            <div id="flights">
+                <div class="row">
+                    <div class="col m10 offset-m1">
+                        <div class="card horizontal">
+                            <div class="valign-wrapper">
+                                <!-- <i class="large material-icons left center">airline_seat_recline_extra</i> -->
+                                <img src="images/airplane_icon.jpeg">
                             </div>
-                            <div class="card-action">
-                                <p class="text-darken-4"><em>Search if a passenger is checked-in, connecting, and what flight(s) they are associated with.</em>
-                                </p>
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4 center-align">Staff Flight
+                                        Search</span>
+                                </div>
+                                <div class="card-action">
+                                    <p class="text-darken-4"><em>Query for particular flights by airline, concourse,
+                                            route,
+                                            etc.</em>
+                                    </p>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-            
+                </div>
+
+                <div class="row">
+                    <div class="col m10 offset-m1">
+                        <div class="card horizontal">
+                            <div class="valign-wrapper">
+                                <!-- <i class="large material-icons left center">airline_seat_recline_extra</i> -->
+                                <img src="images/flight_record_icon.jpeg">
+                            </div>
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4 center-align">Generate
+                                        Flight
+                                        Logs</span>
+
+                                </div>
+                                <div class="card-action">
+                                    <p class="text-darken-4"><em>View and genereate a download flight manifest for all
+                                            passengers
+                                            aboard a particular flight.</em>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
+
         </div>
-
-        <div id="flights">
-            <div class="row">
-                <div class="col m10 offset-m1">
-                    <div class="card horizontal">
-                        <div class="valign-wrapper">
-                            <!-- <i class="large material-icons left center">airline_seat_recline_extra</i> -->
-                            <img src="images/airplane_icon.jpeg">
-                        </div>
-                        <div class="card-stacked">
-                            <div class="card-content">
-                                <span class="card-title activator grey-text text-darken-4 center-align">Staff Flight
-                                    Search</span>
-                            </div>
-                            <div class="card-action">
-                                <p class="text-darken-4"><em>Query for particular flights by airline, concourse, route,
-                                        etc.</em>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col m10 offset-m1">
-                    <div class="card horizontal">
-                        <div class="valign-wrapper">
-                            <!-- <i class="large material-icons left center">airline_seat_recline_extra</i> -->
-                            <img src="images/flight_record_icon.jpeg">
-                        </div>
-                        <div class="card-stacked">
-                            <div class="card-content">
-                                <span class="card-title activator grey-text text-darken-4 center-align">Generate Flight
-                                    Logs</span>
-
-                            </div>
-                            <div class="card-action">
-                                <p class="text-darken-4"><em>View and genereate a download flight manifest for all
-                                        passengers
-                                        aboard a particular flight.</em>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-    </div>
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="javascripts/general.js.js"></script>
+        <script src="javascripts/general.js"></script>
         <script src="javascripts/materialize.min.js"></script>
         <script src="javascripts/staffDashboard.js"></script>
         <script>
@@ -151,7 +158,7 @@ Staff Dashboard
             const instance = M.Tabs.init(el, {});
         </script>
 
-</body>
+    </body>
 
 
 </html>
