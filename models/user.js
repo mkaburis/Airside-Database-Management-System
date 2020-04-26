@@ -76,11 +76,11 @@ async function authenticateUser(username, password) {
 }
 
 async function addUser(username, passwordHash, permission) {
-  const isAdded = bcrypt.hash(password, saltRounds)
+  const isAdded = await bcrypt.hash(passwordHash, saltRounds)
     .then(async (hash) => {
-      const query = 'INSERT INTO users(username, password, permission) VALUES ($1, $2, $3)';
+      const query = 'INSERT INTO users(username, password, permission) VALUES ($1, $2, $3) RETURNING *';
 
-      const { rows } = await db.query(query, [username, passwordHash, permission]);
+      const { rows } = await db.query(query, [username, hash, permission]);
 
       return rows.length > 0;
     })
@@ -116,4 +116,4 @@ async function changePassword(username, password) {
 }
 
 
-module.exports = { authenticateUser, getUserById, getUserByUsername }
+module.exports = { authenticateUser, getUserById, getUserByUsername, addUser, changePassword }

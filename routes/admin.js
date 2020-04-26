@@ -5,24 +5,20 @@ const { addUser, changePassword } = require('../models/user');
 const router = express.Router();
 
 router.post('/addUser', async (req, res) => {
-  const { username, password, permission } = req.body;
+  const { username, permission } = req.query;
+  const password = 'password';
 
-  const { userPermission } = req.session.user;
+  const { user } = req.session.user;
+  if (user === undefined) {
+    return res.sendStatus(403);
+  }
 
+  const { userPermission } = user;
   if (userPermission !== 'Admin') {
-    res.sendStatus(403);
+    return res.sendStatus(403);
   }
 
-
-  let permissionInt = -1;
-  if (permission === 'staff') {
-    permissionInt = 1;
-  }
-  if (permission === 'admin') {
-    permissionInt = 2;
-  }
-
-  const success = await addUser(username, password, permissionInt);
+  const success = await addUser(username, password, permission);
 
   if (success) {
     res.sendStatus(200);
