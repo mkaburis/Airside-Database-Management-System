@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<title>Profile Info</title>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link href="stylesheets/materialize.min.css" rel="stylesheet" />
+
+    <link href="stylesheets/profile.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper black-text">
+                <a href="#" class="brand-logo center black-text"><img class="left" src="images/tpa_logo_nav.jpeg" />Profile Details</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a href="staffDashboard.html" class="black-text"><i class="material-icons left">arrow_back</i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col m8 offset-m2">
+                <div class="card white darken-1">
+                    <div class="card-content light-blue darken-1">
+                        <span class="card-title white-text center">Your Profile</span>
+                    </div>
+                    <div class="card-action">
+                        <div class="row notBottomMargin center">
+                            <div class="col s6">
+                                <p class="flow-text">Current Username:</p> </div>
+                            <div class="col s6"> <p class="flow-text">User</p></div>
+                        </div>
+                        <div class="row notBottomMargin center">
+                            <div class="col s6">
+                                <p class="flow-text">Current Permissions:</p> </div>
+                            <div class="col s6"> <p class="flow-text">User</p></div>
+                        </div>
+                    </div>
+                    
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col m8 offset-m2">
+                <div class="card white darken-1">
+                    <div class="card-content light-blue darken-1">
+                        <span class="card-title white-text center">Update Your Password</span>
+                    </div>
+                    <div class="card-action">
+                        <div class="row notBottomMargin">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col offset-s3 s6">
+                                        <input id="current_password" type="password" class="validate" maxlen="50">
+                                        <label for="password">Current password</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col offset-s3 s6">
+                                        <input id="new_password" type="password" class="validate" maxlen="50">
+                                        <label for="password">New password</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col offset-s3 s6">
+                                        <input id="confirm_new_password" type="password" class="validate" maxlen="50">
+                                        <label for="password">Confirm new password</label>
+                                    </div>
+                                </div>
+                                <div class="row center">
+                                    <button class="btn waves-effect waves-light light-blue accent-4" type="submit" name="action">Update Password
+                                        <i class="material-icons right">lock</i>
+                                      </button>
+                                </div>
+                            </form>
+
+                        </div>
+                      </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/materialize.min.js"></script>
+</body>
+
+
+
+</html>

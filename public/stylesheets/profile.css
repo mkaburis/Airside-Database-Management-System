@@ -1,0 +1,34 @@
+body {
+    background-color: whitesmoke  !important;
+}
+
+.nav-wrapper {
+    background-color: white;
+}
+
+.navbar-fixed {
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+
+.brand-logo{
+    display: inline-block;
+    height: 100%;
+}
+
+.brand-logo>img {
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.header-nav-bar{
+    margin-bottom: 1rem;
+}
+
+.btn {
+    border-radius: 0.4rem;
+}
+
