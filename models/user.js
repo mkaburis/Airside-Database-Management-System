@@ -77,7 +77,7 @@ async function authenticateUser(username, password) {
 
 async function addUser(username, passwordHash, permission) {
   const isAdded = bcrypt.hash(password, saltRounds)
-    .then((hash) => {
+    .then(async (hash) => {
       const query = 'INSERT INTO users(username, password, permission) VALUES ($1, $2, $3)';
 
       const { rows } = await db.query(query, [username, passwordHash, permission]);
@@ -100,7 +100,7 @@ async function changePassword(username, password) {
   }
 
   const isChanged = bcrypt.hash(password, saltRounds)
-    .then((hash) => {
+    .then(async (hash) => {
       const query = 'UPDATE users SET password=$1 WHERE userid=$2;';
 
       const { rows } = await db.query(query, [hash, user.id]);

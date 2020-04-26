@@ -22,7 +22,7 @@ router.post('/addUser', async (req, res) => {
     permissionInt = 2;
   }
 
-  const success = addUser(username, password, permissionInt);
+  const success = await addUser(username, password, permissionInt);
 
   if (success) {
     res.sendStatus(200);
@@ -39,7 +39,7 @@ router.post('/changeUserPassword', async (req, res) => {
     res.sendStatus(403);
   }
 
-  const success = changePassword(username, password);
+  const success = await changePassword(username, password);
 
   if (success) {
     res.sendStatus(200);
