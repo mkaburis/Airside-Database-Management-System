@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+<title>Admin Dashboard</title>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link href="stylesheets/materialize.min.css" rel="stylesheet" />
+    <!--Import adminDashboard.css-->
+    <link href="stylesheets/adminDashboard.css" rel="stylesheet" />
+</head>
+
+<body>
+<header>
+    <nav class="nav-extended">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center white-text"><img class="left" src="images/tpa-logo-nav-white-background.jpeg" />Airside
+                Admin Dashboard</a>
+
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li><a class="white-text" href="#">User</a></li>
+            </ul>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <!-- <li><button type="button" id='logOutButton'><i class="material-icons">exit_to_app</i></a> -->
+                <li><a class="white-text" id='logOutButton'><i class="large material-icons">exit_to_app</i></a></li>
+            </ul>
+        </div>
+
+        <div class="nav-content">
+            <ul class="tabs tabs-fixed-width">
+                <li class="tab"><a class="active" href="#admin_ops">Admin Operations</a></li>
+                <li class="tab"><a href="#passengers">Staff Passenger Operations</a></li>
+                <li class="tab"><a href="#flights">Staff Flight Operations</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+    <div class="body">
+
+        <div id="admin_ops">
+            <div class="row">
+                <div class="col m10 offset-m1">
+                    <div class="card horizontal">
+                        <div class="valign-wrapper">
+                            <img src="images/manage_users.jpeg">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4 center-align">Manage Users</span>
+            
+                            </div>
+                            <div class="card-action">
+                                <p class="text-darken-4"><em>Add, update, and delete users within Airside DBMS. This utility may also be utilized to view a list of users and their respective permissions within the Airside DBMS.</em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col m10 offset-m1">
+                    <div class="card horizontal">
+                        <div class="valign-wrapper">
+                            <img src="images/manage_destinations.jpeg">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4 center-align">Manage Destinations</span>
+                            </div>
+                            <div class="card-action">
+                                <p class="text-darken-4"><em>Add, delete, and update Desitnations within the Airside DBMS. This utility may also be used to search for existing destinations.</em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col m10 offset-m1">
+                    <div class="card horizontal">
+                        <div class="valign-wrapper">
+                            <img src="images/manage_planes.jpeg">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4 center-align">Manage Destinations</span>
+                            </div>
+                            <div class="card-action">
+                                <p class="text-darken-4"><em>Add, delete, and update planes within the Airside DBMS. This utility may also be used to search for existing planes.</em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col m10 offset-m1">
+                    <div class="card horizontal">
+                        <div class="valign-wrapper">
+                            <img src="images/manage_routes.jpeg">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4 center-align">Manage Routes</span>
+                            </div>
+                            <div class="card-action">
+                                <p class="text-darken-4"><em>Add, delete, and update routes within the Airside DBMS. This utility may also be used to search for existing routes. Routes can also be updated as active or not active.</em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col m10 offset-m1">
+                    <div class="card horizontal">
+                        <div class="valign-wrapper">
+                            <img src="images/manage_flight_logs.jpeg">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4 center-align">Manage Flight Logs</span>
+                            </div>
+                            <div class="card-action">
+                                <p class="text-darken-4"><em>Add, delete, and update flight logs within the Airside DBMS. This utility may also be used to search for existing flight logs.</em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+       
+       
+       
+        </div>
+
+        <div id="passengers">
+
+            <div class="row">
+                <div class="col m10 offset-m1">
+                    <div class="card horizontal">
+                        <div class="valign-wrapper">
+                            <!-- <i class="large material-icons left center">airline_seat_recline_extra</i> -->
+                            <img src="images/add_delete_passenger_icon.jpeg">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4 center-align">Manage Passengers</span>
+            
+                            </div>
+                            <div class="card-action">
+                                <p class="text-darken-4"><em>Add, update, and delete passengers in the database. May search/update
+                                        by attributes of passenger ID, first name, last name, data of birth, passport number,
+                                        driver's license number, and home airport.</em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col m10 offset-m1">
+                    <div class="card horizontal">
+                        <div class="valign-wrapper">
+                            <!-- <i class="large material-icons left center">airline_seat_recline_extra</i> -->
+                            <img src="images/passenger_flights.jpeg">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4 center-align">Passenger Flight Information Lookup</span>
+            
+                            </div>
+                            <div class="card-action">
+                                <p class="text-darken-4"><em>Search if a passenger is checked-in, connecting, and what flight(s) they are associated with.</em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+        </div>
+
+        <div id="flights">
+            <div class="row">
+                <div class="col m10 offset-m1">
+                    <div class="card horizontal">
+                        <div class="valign-wrapper">
+                            <!-- <i class="large material-icons left center">airline_seat_recline_extra</i> -->
+                            <img src="images/airplane_icon.jpeg">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4 center-align">Staff Flight
+                                    Search</span>
+                            </div>
+                            <div class="card-action">
+                                <p class="text-darken-4"><em>Query for particular flights by airline, concourse, route,
+                                        etc.</em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col m10 offset-m1">
+                    <div class="card horizontal">
+                        <div class="valign-wrapper">
+                            <!-- <i class="large material-icons left center">airline_seat_recline_extra</i> -->
+                            <img src="images/flight_record_icon.jpeg">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4 center-align">Generate Flight
+                                    Logs</span>
+
+                            </div>
+                            <div class="card-action">
+                                <p class="text-darken-4"><em>View and genereate a download flight manifest for all
+                                        passengers
+                                        aboard a particular flight.</em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="javascripts/general.js.js"></script>
+        <script src="javascripts/materialize.min.js"></script>
+        <script src="javascripts/adminDashboard.js"></script>
+        <script>
+            const el = document.querySelector('.tabs');
+            const instance = M.Tabs.init(el, {});
+        </script>
+
+</body>
+
+
+</html>
