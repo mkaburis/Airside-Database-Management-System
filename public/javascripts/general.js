@@ -10,3 +10,15 @@ function logout() {
     }
   });
 }
+
+function profile() {
+  const url = '../profile.html';
+  fetch(url, {
+    method: 'POST',
+    redirect: 'follow'
+  }).then((response) => {
+    if (response.redirected) {
+      window.location.href = response.url;
+    }
+  });
+}

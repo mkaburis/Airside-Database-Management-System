@@ -19,4 +19,8 @@ router.get('/flightSearch', (req, res) => {
   res.sendfile(path.resolve(__dirname, '../public/index.html'));
 });
 
+router.get('/profile', (req, res) => {
+  res.sendfile(path.resolve(__dirname, '../public/profile.html'));
+});
+
 module.exports = router;
