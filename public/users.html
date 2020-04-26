@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+    <title>Manage Users</title>
+
+    <head>
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link href="stylesheets/materialize.min.css" rel="stylesheet" />
+        <!--Import adminDashboard.css-->
+        <link href="stylesheets/adminDashboard.css" rel="stylesheet" />
+    </head>
+
+    <body>
+        <header>
+            <nav class="nav-extended">
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo center white-text"><img class="left"
+                            src="images/tpa-logo-nav-white-background.jpeg" />Manage Users</a>
+
+                    <ul id="nav-mobile" class="left hide-on-med-and-down">
+                        <li><a class="white-text" href="profile">User</a></li>
+                    </ul>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <!-- <li><button type="button" id='logOutButton'><i class="material-icons">exit_to_app</i></a> -->
+                        <li><a class="white-text" id='logOutButton'><i class="large material-icons">exit_to_app</i></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-content">
+                    <ul class="tabs tabs-fixed-width">
+                        <li class="tab"><a class="active" href="#usersList">View Users</a></li>
+                        <li class="tab"><a href="#addUser">Add User</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="body">
+            <div class="container" id="usersList">
+                <table class="centered responsive-table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Username</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tBody">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="container" id="addUser">
+                <div class="row">
+                    <div class="col m10 offset-m1">
+                        <div class="card horizontal">
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4 center-align">
+                                        New user info
+                                    </span>
+                                </div>
+                                <div class="card-action">
+                                    <div class="row">
+                                        <form class="col s12">
+                                            <div class="row">
+                                                <div class="input-field col m6">
+                                                    <input id="username" type="text" class="validate" minlength="4"
+                                                        required>
+                                                    <label for="username">Username</label>
+                                                </div>
+                                                <div class="col m6" id="authRadioGroup">
+                                                    <label for="authRadioGroup">Select user access level</label>
+                                                    <div class="row">
+                                                        <div class="col m4">
+                                                            <p>
+                                                                <label>
+                                                                    <input name="authRadio" type="radio" value="1"
+                                                                        checked />
+                                                                    <span>Staff</span>
+                                                                </label>
+                                                            </p>
+                                                        </div>
+                                                        <div class="col m4">
+                                                            <p>
+                                                                <label>
+                                                                    <input name="authRadio" type="radio" value="2" />
+                                                                    <span>Admin</span>
+                                                                </label>
+                                                            </p>
+                                                        </div>
+                                                        <div class="col m4">
+                                                            <p>
+                                                                <label>
+                                                                    <input name="authRadio" type="radio" value="-1" />
+                                                                    <span>Inactive</span>
+                                                                </label>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="rowr right-align">
+                                                <button type="button" class="waves-effect waves-light btn"
+                                                    id="saveButton">Save</a>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="javascripts/general.js"></script>
+        <script src="javascripts/materialize.min.js"></script>
+        <script src="javascripts/users.js"></script>
+        <script>
+            const el = document.querySelector('.tabs');
+            const instance = M.Tabs.init(el, {});
+        </script>
+
+    </body>
+
+</html>
