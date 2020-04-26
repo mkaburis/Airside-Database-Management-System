@@ -6,9 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const url = '../api/profile';
 
   fetch(url, {
-    method: 'POST'
+    method: 'GET'
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.status === 401) {
+        window.location = '/login';
+      } else {
+        response.json();
+      }
+    })
     .then((response) => {
       document.getElementById('current_user').innerHTML = response.name;
     }).catch((err) => console.log(err));
