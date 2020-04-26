@@ -23,19 +23,20 @@ function addRow(entry) {
   arrivalTime.classList.add('center-align');
   isDelayed.classList.add('center-align');
 
-  const arrivalDate = new Date(entry.arrivaltime);
-  const departureDate = new Date(entry.departuretime);
+  const arrivalDate = new Date(entry.arrivalTime);
+  const departureDate = new Date(entry.departureTime);
 
-  flightNo.innerText = `${entry.airlinecode} ${entry.flightno}`;
+  tr.id = entry.id;
+  flightNo.innerText = entry.flightNumber;
   date.innerText = arrivalDate.toLocaleDateString();
-  departureTime.innerText = arrivalDate.toLocaleTimeString();
-  arrivalTime.innerText = departureDate.toLocaleTimeString();
+  departureTime.innerText = departureDate.toLocaleTimeString();
+  arrivalTime.innerText = arrivalDate.toLocaleTimeString();
 
-  isDelayed.innerText = entry.isdelayed ? 'Delayed' : 'On Time';
-  route.innerText = `${entry.fliesfrom} - ${entry.fliesto}`;
-  gate.innerText = entry.gateno;
+  isDelayed.innerText = entry.isDelayed ? 'Delayed' : 'On Time';
+  route.innerText = `${entry.departureCity} - ${entry.arrivalCity}`;
+  gate.innerText = entry.gateNumber;
 
-  if (entry.isdelayed) {
+  if (entry.isDelayed) {
     isDelayed.style.color = 'red';
   } else {
     isDelayed.style.color = 'green';
