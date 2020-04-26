@@ -1,10 +1,17 @@
 const express = require('express');
 
-const db = require('../db/postgres');
-
 const { getUserById } = require('../models/user');
 
 const router = express.Router();
+
+router.get('/', async (req, res) => {
+  const { user } = req.session;
+
+  const { username } = user;
+  const { permission } = user;
+
+  return res.json({ name: username, access: permission });
+});
 
 // /* GET users info. */
 // router.get('/:userId', async (req, res) => {
