@@ -66,4 +66,30 @@ async function authenticateUser(username, password) {
   }
 }
 
+async function addUser(username, passwordHash, permission) {
+  const query = 'INSERT INTO users(username, password, permission) VALUES ($1, $2, $3)';
+
+  const { rows } = await db.query(query, [username, passwordHash, permission]);
+
+  return rows.length > 0;
+}
+
+async function changePassword(username, password) {
+  const user = await getUserByUsername(username);
+
+  if (user == null) {
+    return { user: null, message: `User ${username} not found` };
+  }
+
+  try {
+    if (await bcrypt.compare(password, user.password)) {
+      return { user: user, message: "User found" };
+    }
+    return { user: null, message: 'Password incorrect' };
+  } catch (error) {
+    return ({ user: null, message: error });
+  }
+}
+
+
 module.exports = { authenticateUser, getUserById, getUserByUsername }
