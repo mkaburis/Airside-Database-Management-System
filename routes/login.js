@@ -4,21 +4,11 @@ const { authenticateUser } = require('../models/user');
 
 const router = express.Router();
 
-function authorizedRedirect(user) {
-  if (user.permission === 1) {
-    return '/passengerDashboard.html';
-  }
-  if (user.permission === 5) {
-    return '/adminDashboard.html';
-  }
-  return '/staffDashboard.html';
-}
-
 router.post('/login', async (req, res) => {
-  if (req.session.user != null) {
-    const { user } = req.session;
-    const dashboardPath = authorizedRedirect(user);
-    return res.json({ dashUrl: dashboardPath, auth: true });
+  const dashboardPath = '/dashboard';
+  if (req.session.user !== undefined) {
+    return res.redirect(dashboardPath);
+    // return res.json({ dashUrl: dashboardPath, auth: true });
   }
 
   const { username, password } = req.query;
@@ -29,14 +19,13 @@ router.post('/login', async (req, res) => {
   }
   req.session.user = user;
   req.session.loggedin = true;
-  const dashboardPath = authorizedRedirect(user);
   return res.json({ dashUrl: dashboardPath, auth: true });
 });
 
 router.post('/logout', (req, res) => {
   req.session.user = null;
   req.session.loggedin = false;
-  res.redirect('/login.html');
+  res.redirect('/login');
 });
 
 router.post('/profile', async (req, res) => {
@@ -46,7 +35,7 @@ router.post('/profile', async (req, res) => {
 
   req.session.user = user;
   req.session.loggedin = true;
-  res.redirect('/profile.html');
+  res.redirect('/profile');
 });
 
 module.exports = router;

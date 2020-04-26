@@ -5,11 +5,6 @@ const router = Router();
 
 /* GET users info. */
 router.get('/:userId', async (req, res) => {
-  if (!req.isAuthenticated()) {
-    res.redirect('../../login.html');
-    return;
-  }
-
   const { userId } = req.params;
   const {
     rows

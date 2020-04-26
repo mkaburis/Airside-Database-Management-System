@@ -3,15 +3,39 @@ const path = require('path');
 
 const router = express.Router();
 
-router.get('/staffDashboard', (req, res) => {
-  if (req.isAuthenticated()) {
-    res.sendFile(path.resolve(path, '../public/staffDashboard.html'));
-  } else {
-    res.redirect('/login.html');
+function isAuthenticated(req, res, next) {
+  const { loggedin } = req.session;
+
+  if (loggedin === undefined) {
+    return res.redirect('/login');
+  }
+  return next();
+}
+
+router.get('/staffDashboard', isAuthenticated, (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../public/staffDashboard.html'));
+});
+
+router.get('/adminDashboard', isAuthenticated, (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../public/adminDashboard.html'));
+});
+
+router.get('/dashboard', isAuthenticated, (req, res) => {
+  const { permission } = req.session.user;
+
+  if (permission === 'Staff') {
+    res.sendFile(path.resolve(__dirname, '../public/staffDashboard.html'));
+  }
+  if (permission === 'Admin') {
+    res.sendFile(path.resolve(__dirname, '../public/adminDashboard.html'));
   }
 });
 
-router.get('/login', (req, res) => {
+router.get('/login', isAuthenticated, (req, res) => {
+  const { loggedin } = req.session;
+  if (loggedin) {
+    return res.redirect('/dashboard');
+  }
   res.sendFile(path.resolve(__dirname, '../public/login.html'));
 });
 
@@ -19,7 +43,7 @@ router.get('/flightSearch', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../public/index.html'));
 });
 
-router.get('/profile', (req, res) => {
+router.get('/profile', isAuthenticated, (req, res) => {
   res.sendFile(path.resolve(__dirname, '../public/profile.html'));
 });
 

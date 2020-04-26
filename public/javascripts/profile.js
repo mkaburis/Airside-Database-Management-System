@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('hello world');
-
   document.getElementById('current_user').innerHTML = 'New UserName';
   document.getElementById('current_permissions').innerHTML = 'New Permissions';
   const url = '../api/profile';
@@ -8,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch(url, {
     method: 'GET'
   })
+    // eslint-disable-next-line consistent-return
     .then((response) => {
       if (response.status === 401) {
         window.location = '/login';
