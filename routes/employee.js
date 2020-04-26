@@ -1,13 +1,18 @@
 const express = require('express');
-const bcrypt = require('bcryptjs');
 
-const { addUser } = require('../models/user');
+const { addUser, changePassword } = require('../models/user');
 
 const router = express.Router();
 
 router.post('/addUser', async (req, res) => {
   const { username, password, permission } = req.body;
-  const saltRounds = 10;
+
+  const { userPermission } = req.session.user;
+
+  if (userPermission !== 'Admin') {
+    res.sendStatus(403);
+  }
+
 
   let permissionInt = -1;
   if (permission === 'staff') {
@@ -17,12 +22,24 @@ router.post('/addUser', async (req, res) => {
     permissionInt = 2;
   }
 
-  const success = bcrypt.hash(password, saltRounds)
-    .then((hash) => addUser(username, hash, permissionInt))
-    .catch((e) => {
-      console.log(e);
-      return false;
-    });
+  const success = addUser(username, password, permissionInt);
+
+  if (success) {
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(500);
+  }
+});
+
+router.post('/changeUserPassword', async (req, res) => {
+  const { password } = req.body;
+  const { username, permission } = req.session.user;
+
+  if (permission !== 'Admin') {
+    res.sendStatus(403);
+  }
+
+  const success = changePassword(username, password);
 
   if (success) {
     res.sendStatus(200);
