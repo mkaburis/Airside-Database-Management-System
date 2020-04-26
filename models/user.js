@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const db = require('../db/postgres');
 
+const saltRounds = 10;
+
 class User {
   id;
   username;
@@ -11,7 +13,14 @@ class User {
     this.id = id;
     this.password = passwordHash;
     this.username = username;
-    this.permission = permission
+
+    if (permission === 1) {
+      this.permission = 'Staff';
+    } else if (permission === 2) {
+      this.permission = 'Admin';
+    } else {
+      this.permission = 'Uknown';
+    }
   }
 }
 
@@ -67,11 +76,20 @@ async function authenticateUser(username, password) {
 }
 
 async function addUser(username, passwordHash, permission) {
-  const query = 'INSERT INTO users(username, password, permission) VALUES ($1, $2, $3)';
+  const isAdded = bcrypt.hash(password, saltRounds)
+    .then((hash) => {
+      const query = 'INSERT INTO users(username, password, permission) VALUES ($1, $2, $3)';
 
-  const { rows } = await db.query(query, [username, passwordHash, permission]);
+      const { rows } = await db.query(query, [username, passwordHash, permission]);
 
-  return rows.length > 0;
+      return rows.length > 0;
+    })
+    .catch((e) => {
+      console.log(e);
+      return false;
+    });
+
+  return isAdded;
 }
 
 async function changePassword(username, password) {
@@ -81,14 +99,20 @@ async function changePassword(username, password) {
     return { user: null, message: `User ${username} not found` };
   }
 
-  try {
-    if (await bcrypt.compare(password, user.password)) {
-      return { user: user, message: "User found" };
-    }
-    return { user: null, message: 'Password incorrect' };
-  } catch (error) {
-    return ({ user: null, message: error });
-  }
+  const isChanged = bcrypt.hash(password, saltRounds)
+    .then((hash) => {
+      const query = 'UPDATE users SET password=$1 WHERE userid=$2;';
+
+      const { rows } = await db.query(query, [hash, user.id]);
+
+      return rows.length > 0;
+    })
+    .catch((e) => {
+      console.log(e);
+      return false;
+    });
+
+  return isChanged;
 }
 
 
