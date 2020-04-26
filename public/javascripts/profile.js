@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (response.status === 401) {
         window.location = '/login';
       } else {
-        response.json();
+        return response.json();
       }
     })
     .then((response) => {
