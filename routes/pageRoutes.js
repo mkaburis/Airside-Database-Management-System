@@ -31,7 +31,7 @@ router.get('/dashboard', isAuthenticated, (req, res) => {
   }
 });
 
-router.get('/login', isAuthenticated, (req, res) => {
+router.get('/login', (req, res) => {
   const { loggedin } = req.session;
   if (loggedin) {
     return res.redirect('/dashboard');
