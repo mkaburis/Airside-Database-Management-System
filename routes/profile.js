@@ -1,19 +1,25 @@
 const express = require('express');
 
-const { checkPassword, changePassword } = require('../models/user');
+const { checkPassword, changePassword, getUserByUsername } = require('../models/user');
 
 const router = express.Router();
 
 router.post('/update', async (req, res) => {
   const { username, currentpassword, newpassword } = req.query;
 
+  const user = await getUserByUsername(username);
 
-  if (!checkPassword(username, currentpassword)) {
-    return res.status(401).json({ error: 'Current password is incorrect' });
+  const isValidPassword = await checkPassword(user, currentpassword);
+  if (!isValidPassword) {
+    return res.status(401).json({ message: 'Current password is incorrect' });
   }
 
-  changePassword(username, newpassword);
-  return res.json({ changePassword: true });
+  const success = await changePassword(user, newpassword);
+
+  if (success === true) {
+    return res.status(200).json({ message: 'Password changed successfully' });
+  }
+  return res.status(500).json({ message: 'Error changing password' });
 });
 
 router.get('/', async (req, res) => {

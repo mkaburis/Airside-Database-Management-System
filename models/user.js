@@ -92,14 +92,12 @@ async function addUser(username, passwordHash, permission) {
   return isAdded;
 }
 
-async function changePassword(username, password) {
-  const user = await getUserByUsername(username);
-
+async function changePassword(user, password) {
   if (user == null) {
-    return { user: null, message: `User ${username} not found` };
+    return { message: `User not found` };
   }
 
-  const isChanged = bcrypt.hash(password, saltRounds)
+  const isChanged = await bcrypt.hash(password, saltRounds)
     .then(async (hash) => {
       const query = 'UPDATE users SET password=$1 WHERE userid=$2;';
 
@@ -111,7 +109,6 @@ async function changePassword(username, password) {
       console.log(e);
       return false;
     });
-
   return isChanged;
 }
 
@@ -123,18 +120,16 @@ async function getAllUsers(permission) {
   return rows;
 }
 
-module.exports = { authenticateUser, getUserById, getUserByUsername, addUser, changePassword, getAllUsers }
-async function checkPassword(username, password) {
-  const user = await getUserByUsername(username);
+async function checkPassword(user, password) {
   if (user == null) {
-    return { user: null, message: `User ${username} not found` };
+    return { message: `User not found` };
   }
 
   if (bcrypt.compare(user.password, password)) {
     return true;
   }
-  return false;
+  return false
 }
 
 
-module.exports = { authenticateUser, checkPassword, getUserById, getUserByUsername, addUser, changePassword }
+module.exports = { authenticateUser, getUserById, getUserByUsername, addUser, changePassword, getAllUsers, checkPassword }
