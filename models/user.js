@@ -124,3 +124,17 @@ async function getAllUsers(permission) {
 }
 
 module.exports = { authenticateUser, getUserById, getUserByUsername, addUser, changePassword, getAllUsers }
+async function checkPassword(username, password) {
+  const user = await getUserByUsername(username);
+  if (user == null) {
+    return { user: null, message: `User ${username} not found` };
+  }
+
+  if (bcrypt.compare(user.password, password)) {
+    return true;
+  }
+  return false;
+}
+
+
+module.exports = { authenticateUser, checkPassword, getUserById, getUserByUsername, addUser, changePassword }

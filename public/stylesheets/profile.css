@@ -32,3 +32,23 @@ body {
     border-radius: 0.4rem;
 }
 
+#currentPasswordSpan {
+    color: red;
+    display: none;
+  }
+
+#newPasswordSpan {
+    color: red;
+    display: none;
+  }
+
+#confirmPasswordSpan {
+    color: red;
+    display: none;
+  }
+
+#passwordMatchSpan {
+    color: red;
+    display: none;
+  }
+
