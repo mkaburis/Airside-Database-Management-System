@@ -70,7 +70,9 @@ CREATE TABLE PassengerFlights(FlightID SERIAL REFERENCES FlightLogs(FlightID) NO
                                                                               PassengerID SERIAL REFERENCES Passengers(PassengerID) NOT NULL,
                                                                                                                                     CheckedIn BOOLEAN, Connecting BOOLEAN);
 
-
+-- Create admin for access purposes
+-- username: admin
+-- password: password
 INSERT INTO public.users(userid, username, password, permission)
 VALUES (1,
         'admin',
