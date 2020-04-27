@@ -1,3 +1,7 @@
+#navSpace{
+    margin-top: 5rem;
+}
+
 body {
     background-color: whitesmoke  !important;
 }
@@ -36,7 +40,7 @@ i.icon-black {
 .tabs .tab a:hover {
     background-color:white;
     color: black;
-} 
+}
 
 .tabs .tab a.active {
     background-color:#d32f2f;
@@ -65,13 +69,7 @@ i.icon-black {
     margin-bottom: 1rem;
 }
 
-#logOutButton{
-    background-color: inherit;
-    border: none;
-}
-
 .body {
     position:relative;
     top:150px;
   }
-  

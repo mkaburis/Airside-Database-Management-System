@@ -13,7 +13,8 @@ function getProfileName() {
       }
     })
     .then((response) => {
-      document.getElementById('profile_name').innerHTML = response.name;
+      const icon = document.getElementById('profile_name').innerHTML;
+      document.getElementById('profile_name').innerHTML = `${icon} ${response.name}`;
     }).catch((err) => console.log(err));
 }
 
