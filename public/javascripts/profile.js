@@ -40,7 +40,7 @@ function updatePassword() {
   if (checkNewPasswordMatch(newPwdVal, confirmPwdVal) === true) {
     passwordMatchSpan.style.display = 'none';
 
-    const url = `../api/profile/update?username=${userName}&currentpassword=${currentPwdVal}&newpassword=${newPwdVal}`;
+    const url = `../api/profile/update?currentpassword=${currentPwdVal}&newpassword=${newPwdVal}`;
     fetch(url, {
       method: 'POST'
     })
