@@ -115,5 +115,17 @@ async function changePassword(username, password) {
   return isChanged;
 }
 
+async function checkPassword(username, password) {
+  const user = await getUserByUsername(username);
+  if (user == null) {
+    return { user: null, message: `User ${username} not found` };
+  }
 
-module.exports = { authenticateUser, getUserById, getUserByUsername, addUser, changePassword }
+  if( bcrypt.compare(user.password, password) ) {
+    return true;
+  }
+  return false;
+}
+
+
+module.exports = { authenticateUser, checkPassword, getUserById, getUserByUsername, addUser,changePassword }

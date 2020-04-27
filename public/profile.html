@@ -66,28 +66,30 @@
                                 <div class="row notBottomMargin">
                                     <form class="col s12">
                                         <div class="row">
-                                            <div class="input-field col offset-s3 s6">
-                                                <input id="current_password" type="password" class="validate"
-                                                    maxlen="50">
+                                            <div class="input-field col s8 offset-s2">
+                                                <input id="current_password" type="password" class="validate" required=>
                                                 <label for="password">Current password</label>
+                                                <span id="currentPasswordSpan" class="helper-text">Current password cannot be empty</span>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="input-field col offset-s3 s6">
-                                                <input id="new_password" type="password" class="validate" maxlen="50">
+                                            <div class="input-field col s8 offset-s2">
+                                                <input id="new_password" type="password" class="validate" required>
                                                 <label for="password">New password</label>
+                                                <span id="newPasswordSpan" class="helper-text">New password cannot be empty</span>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="input-field col offset-s3 s6">
-                                                <input id="confirm_new_password" type="password" class="validate"
-                                                    maxlen="50">
-                                                <label for="password">Confirm new password</label>
+                                            <div class="input-field col s8 offset-s2">
+                                                <input id="confirm_password" type="password" class="validate" required>
+                                                <label for="confirm_password">Confirm Password</label>
+                                                <span id="confirmPasswordSpan" class="helper-text">You must confirm the password</span>
+                                                <span id="passwordMatchSpan" class="helper-text">Passwords must match</span>
                                             </div>
                                         </div>
                                         <div class="row center">
                                             <button class="btn waves-effect waves-light light-blue accent-4"
-                                                type="submit" name="action">Update Password
+                                            id="updatePasswordButton" type="button">Update Password
                                                 <i class="material-icons right">lock</i>
                                             </button>
                                         </div>
