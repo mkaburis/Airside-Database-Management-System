@@ -20,6 +20,11 @@
                     <ul id="nav-mobile" class="left hide-on-med-and-down">
                         <li><a href="dashboard" class="white-text"><i class="material-icons left">arrow_back</i></a>
                     </ul>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <!-- <li><button type="button" id='logOutButton'><i class="material-icons">exit_to_app</i></a> -->
+                        <li><a class="white-text" id='logOutButton'><i class="large material-icons">exit_to_app</i></a>
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="nav-content">
@@ -31,4 +36,22 @@
             </nav>
         </div>
 
+        <div id="navSpace"></div>
+
+        <div class="body">
+            <div class="destinationsList center-align">
+
+
+            </div>
+        </div>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="javascripts/general.js"></script>
+        <script src="javascripts/materialize.min.js"></script>
+        <script src="javascripts/destinations.js"></script>
+        <script>
+            const el = document.querySelector('.tabs');
+            const instance = M.Tabs.init(el, {});
+        </script>
+    </body>
 </html>
