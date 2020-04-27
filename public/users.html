@@ -9,11 +9,11 @@
         <!--Import materialize.css-->
         <link href="stylesheets/materialize.min.css" rel="stylesheet" />
         <!--Import adminDashboard.css-->
-        <link href="stylesheets/adminDashboard.css" rel="stylesheet" />
+        <link href="stylesheets/users.css" rel="stylesheet" />
     </head>
 
     <body>
-        <header>
+        <div class="navbar-fixed">
             <nav class="nav-extended">
                 <div class="nav-wrapper">
                     <a href="#" class="brand-logo center white-text"><img class="left"
@@ -36,23 +36,66 @@
                     </ul>
                 </div>
             </nav>
-        </header>
+        </div>
 
-        <div class="body">
-            <div class="container" id="usersList">
-                <table class="centered responsive-table">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Username</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
+        <div id="navSpace"></div>
 
-                    <tbody id="tBody">
-                    </tbody>
-                </table>
+        <div class="container center-align">
+            <div class="center-align">
+                <div class="container">
+                    <div class="row">
+                        <div class="col m8 offset-m2">
+                            <div class="card white darken-1">
+                                <div class="card-action">
+                                    <div class="row notBottomMargin">
+                                        <form class="col s12">
+                                            <div class="row">
+                                                <div class="input-field col s8">
+                                                    <select id="permissionSelect">
+                                                        <option value="" disabled selected>Choose your option
+                                                        </option>
+                                                        <option value="0">All Users</option>
+                                                        <option value="1">Staff</option>
+                                                        <option value="2">Admin</option>
+                                                    </select>
+                                                    <label for="permissionSelect">Select user Permissions</label>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col s4">
+                                                        <button class="btn waves-effect waves-light light-blue accent-4"
+                                                            type="button" id="searchButton">
+                                                            Search <i class="material-icons right">search</i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col m10 offset-m1">
+                            <div class="card-panel white" id="tableWrapper">
+                                <table class="highlight centered responsive-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="center-align" scope="col">Id</th>
+                                            <th class="center-align" scope="col">Username</th>
+                                            <th class="center-align" scope="col">Edit</th>
+                                            <th class="center-align" scope="col">Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tBody">
+                                    </tbody>
+                                </table>
+                                <div class="section"></div>
+                                <span id='noUsersFound'>No users found</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="container" id="addUser">
                 <div class="row">
@@ -125,11 +168,6 @@
         <script src="javascripts/general.js"></script>
         <script src="javascripts/materialize.min.js"></script>
         <script src="javascripts/users.js"></script>
-        <script>
-            const el = document.querySelector('.tabs');
-            const instance = M.Tabs.init(el, {});
-        </script>
-
     </body>
 
 </html>

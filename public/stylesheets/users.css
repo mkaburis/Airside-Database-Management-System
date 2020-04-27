@@ -1,3 +1,7 @@
+#navSpace{
+    margin-top: 5rem;
+}
+
 body {
     background-color: whitesmoke  !important;
 }
@@ -7,12 +11,14 @@ nav {
   }
 
 .nav-wrapper {
-    background-color: white;
+    background-color: black;
 }
 
 .brand-logo{
+
     display: inline-block;
     height: 100%;
+
 }
 
 .brand-logo>img {
@@ -37,7 +43,7 @@ i.icon-black {
 }
 
 .tabs .tab a.active {
-    background-color:#0288d1;
+    background-color:#d32f2f;
     color: white;
 } /*Background and text color when a tab is active*/
 
@@ -50,7 +56,7 @@ i.icon-black {
     }
 
 .tabs {
-    background-color: #039be5;
+    background-color: #e53935;
 }
 
 
