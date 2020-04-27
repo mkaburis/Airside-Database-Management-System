@@ -3,9 +3,11 @@ function login() {
   const passwordInput = document.getElementById('passwordInput');
   const usernameSpan = document.getElementById('usernameSpan');
   const passwordSpan = document.getElementById('passwordSpan');
+  const spanError = document.getElementById('spanError');
 
   const loginVal = loginInput.value;
   const passwordVal = passwordInput.value;
+  spanError.style.display = 'none';
 
   if (!loginInput.checkValidity()) {
     usernameSpan.style.display = 'block';
@@ -28,6 +30,10 @@ function login() {
     .then((response) => {
       if (response.auth === true) {
         window.location.href = response.dashUrl;
+      } else {
+        passwordInput.value = '';
+        spanError.innerText = response.message;
+        spanError.style.display = 'block';
       }
     }).catch((err) => console.log(err));
 }
