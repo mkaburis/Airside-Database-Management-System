@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { addUser, changePassword } = require('../models/user');
+const { addUser, changePassword, getAllUsers } = require('../models/user');
 
 const router = express.Router();
 
@@ -8,13 +8,8 @@ router.post('/addUser', async (req, res) => {
   const { username, permission } = req.query;
   const password = 'password';
 
-  const { user } = req.session.user;
-  if (user === undefined) {
-    return res.sendStatus(403);
-  }
-
-  const { userPermission } = user;
-  if (userPermission !== 'Admin') {
+  const { user } = req.session;
+  if (user === undefined || user.permission !== 'Admin') {
     return res.sendStatus(403);
   }
 
@@ -45,9 +40,17 @@ router.post('/changeUserPassword', async (req, res) => {
 });
 
 /* GET users listing. */
-router.get('/:employeeId', (req, res) => {
-  const { employeeId } = req.params;
-  res.send(`Info about employee ${employeeId}`);
+router.get('/getUsers', async (req, res) => {
+  const { permission } = req.query;
+
+  const { user } = req.session;
+  if (user === undefined || user.permission !== 'Admin') {
+    return res.sendStatus(403);
+  }
+
+  const results = await getAllUsers(permission);
+
+  res.json(results);
 });
 
 module.exports = router;

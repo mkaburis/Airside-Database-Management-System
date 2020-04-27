@@ -115,5 +115,12 @@ async function changePassword(username, password) {
   return isChanged;
 }
 
+async function getAllUsers(permission) {
+  const query = 'SELECT username, permission FROM users WHERE permission=$1';
 
-module.exports = { authenticateUser, getUserById, getUserByUsername, addUser, changePassword }
+  const { rows } = await db.query(query, [permission]);
+
+  return rows;
+}
+
+module.exports = { authenticateUser, getUserById, getUserByUsername, addUser, changePassword, getAllUsers }
