@@ -113,11 +113,22 @@ async function changePassword(user, password) {
 }
 
 async function getAllUsers(permission) {
-  const query = 'SELECT username, permission FROM users WHERE permission=$1';
+  let query = 'SELECT username, permission FROM users';
+  let params = []
+  if (permission === '1' || permission === '2') {
+    query += ' WHERE permission=$1';
+    params = [permission];
+  }
 
-  const { rows } = await db.query(query, [permission]);
 
-  return rows;
+  const result = await db.query(query, params)
+    .then((res) => res.rows)
+    .then((res) => res.map((entry) => {
+      const user = new User(null, entry.username, '', entry.permission);
+      return user;
+    }));
+
+  return result;
 }
 
 async function checkPassword(user, password) {
