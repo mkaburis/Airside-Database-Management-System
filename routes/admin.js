@@ -2,6 +2,8 @@ const express = require('express');
 
 const { addUser, changePassword, getAllUsers } = require('../models/user');
 
+const { getDestinations } = require('../models/destination');
+
 const router = express.Router();
 
 router.post('/addUser', async (req, res) => {
@@ -51,6 +53,36 @@ router.get('/getUsers', async (req, res) => {
   const results = await getAllUsers(permission);
 
   res.json(results);
+});
+
+/* GET destinations listing */
+router.get('/getDestinations', async (req, res) => {
+  let {
+    airportCode, city, administrativeDivision, country } = req.query;
+
+  if (airportCode === null) {
+    airportCode = '%';
+  }
+
+  if (city === null) {
+    city = '%';
+  }
+
+  if (administrativeDivision === null) {
+    administrativeDivision = '%';
+  }
+
+  if (country === null) {
+    country = '%';
+  }
+
+  const queryResults = await getDestinations(airportCode, city, administrativeDivision, country);
+
+  if (queryResults.count < 1) {
+    return res.status(404).json({ error: 'No destinations found' });
+  }
+
+  return res.send(queryResults);
 });
 
 module.exports = router;
