@@ -1,0 +1,75 @@
+#navSpace{
+    margin-top: 5rem;
+}
+
+body {
+    background-color: whitesmoke  !important;
+}
+nav {
+    position: fixed;
+    z-index: 99999;
+  }
+
+.nav-wrapper {
+    background-color: black;
+}
+
+.brand-logo{
+
+    display: inline-block;
+    height: 100%;
+
+}
+
+.brand-logo>img {
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+i.icon-black {
+    color:black;
+}
+
+.header-title img {
+    float: left;
+}
+
+
+.tabs .tab a:hover {
+    background-color:white;
+    color: black;
+}
+
+.tabs .tab a.active {
+    background-color:#d32f2f;
+    color: white;
+} /*Background and text color when a tab is active*/
+
+.tabs .tab a{
+    color:white;
+}
+
+.tabs .indicator{
+    background-color:white;/*your color*/
+    }
+
+.tabs {
+    background-color: #e53935;
+}
+
+
+.container {
+    display: block;
+}
+
+.icon {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.body {
+    position:relative;
+    top:150px;
+  }

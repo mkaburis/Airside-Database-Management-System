@@ -51,4 +51,9 @@ router.get('/users', isAuthenticated, (req, res) => {
   res.sendFile(path.resolve(__dirname, '../public/users.html'));
 });
 
+router.get('/destinations', isAuthenticated, (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../public/destinations.html'));
+});
+
+
 module.exports = router;
