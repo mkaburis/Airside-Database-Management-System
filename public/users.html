@@ -49,19 +49,20 @@
                                 <div class="card-action">
                                     <div class="row notBottomMargin">
                                         <form class="col s12">
-                                            <div class="row">
+                                            <div class="row noMarginBotton">
                                                 <div class="input-field col s8">
                                                     <select id="permissionSelect">
                                                         <option value="" disabled selected>Choose your option
                                                         </option>
-                                                        <option value="0">All Users</option>
+                                                        <option value="0" selected>All Users</option>
                                                         <option value="1">Staff</option>
                                                         <option value="2">Admin</option>
                                                     </select>
                                                     <label for="permissionSelect">Select user Permissions</label>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row noMarginBotton">
                                                     <div class="col s4">
+                                                        <div id="buttonSpace"></div>
                                                         <button class="btn waves-effect waves-light light-blue accent-4"
                                                             type="button" id="searchButton">
                                                             Search <i class="material-icons right">search</i>
@@ -83,6 +84,7 @@
                                         <tr>
                                             <th class="center-align" scope="col">Id</th>
                                             <th class="center-align" scope="col">Username</th>
+                                            <th class="center-align" scope="col">Access Level</th>
                                             <th class="center-align" scope="col">Edit</th>
                                             <th class="center-align" scope="col">Delete</th>
                                         </tr>
