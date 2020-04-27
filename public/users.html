@@ -40,7 +40,7 @@
         <div id="navSpace"></div>
 
         <div class="container center-align">
-            <div class="center-align">
+            <div id="usersList" class="center-align">
                 <div class="container">
                     <div class="row">
                         <div class="col m8 offset-m2">
@@ -172,6 +172,9 @@
         <script>
             const el = document.querySelector('.tabs');
             const instance = M.Tabs.init(el, {});
+
+            const select = document.querySelectorAll('select');
+            const instances = M.FormSelect.init(select);
         </script>
     </body>
 

@@ -100,11 +100,5 @@ function addEventListeners() {
 
 window.addEventListener('DOMContentLoaded', () => {
   addEventListeners();
-  const select = document.querySelectorAll('select');
-  const instances = M.FormSelect.init(select);
-
-  const tabs = document.querySelector('.tabs');
-  const instance = M.Tabs.init(tabs, {});
   searchForUsers();
-
 }, false);
