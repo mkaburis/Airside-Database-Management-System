@@ -99,7 +99,7 @@ async function changePassword(user, password) {
 
   const isChanged = await bcrypt.hash(password, saltRounds)
     .then(async (hash) => {
-      const query = 'UPDATE users SET password=$1 WHERE userid=$2;';
+      const query = 'UPDATE users SET password=$1 WHERE userid=$2 RETURNING *;';
 
       const { rows } = await db.query(query, [hash, user.id]);
 

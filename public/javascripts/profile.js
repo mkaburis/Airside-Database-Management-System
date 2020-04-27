@@ -44,9 +44,9 @@ function updatePassword() {
     fetch(url, {
       method: 'POST'
     })
-    // eslint-disable-next-line consistent-return
+      // eslint-disable-next-line consistent-return
       .then((response) => {
-        if (response.status === 401) {
+        if (response.status !== 200) {
           alert('Could not confirm password!');
         } else {
           return response.json;
@@ -78,7 +78,7 @@ function getUserInfo() {
     })
     .then((response) => {
       document.getElementById('current_user').innerHTML = response.name;
-      userName = response.name;
+      document.getElementById('current_permissions').innerHTML = response.access;
     }).catch((err) => console.log(err));
 }
 

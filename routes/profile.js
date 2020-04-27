@@ -1,13 +1,17 @@
 const express = require('express');
 
-const { checkPassword, changePassword, getUserByUsername } = require('../models/user');
+const { checkPassword, changePassword } = require('../models/user');
 
 const router = express.Router();
 
 router.post('/update', async (req, res) => {
-  const { username, currentpassword, newpassword } = req.query;
+  const { currentpassword, newpassword } = req.query;
 
-  const user = await getUserByUsername(username);
+  const { user } = req.session;
+
+  if (user === undefined) {
+    return res.redirect('/login');
+  }
 
   const isValidPassword = await checkPassword(user, currentpassword);
   if (!isValidPassword) {
