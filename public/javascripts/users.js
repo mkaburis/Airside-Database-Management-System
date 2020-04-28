@@ -50,7 +50,7 @@ function addRow(entry, count) {
   username.innerText = entry.username;
   permission.innerText = entry.permission;
   permission.classList.add('permission');
-  editBtn.innerHTML = '<button class="btn edit" type="button" id="searchButton"> <i class="material-icons">edit</i ></button >';
+  editBtn.innerHTML = '<button class="btn edit" type="button" id="searchButton"> <i class="material-icons">swap_horiz</i ></button >';
   deleteBtn.innerHTML = '<button class="btn delete" type="button" id="searchButton"> <i class="material-icons">delete</i ></button >';
 
   editBtn.addEventListener('click', () => togglePermissions(entryId));
@@ -118,8 +118,7 @@ function addUser() {
         username.value = '';
         return;
       }
-      alert('Error adding user');
-      throw response.statusText;
+      throw new Error(response.statusText);
     })
     .catch((err) => console.log(err));
 }
