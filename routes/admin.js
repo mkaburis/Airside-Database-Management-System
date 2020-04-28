@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { addUser, changePassword, getAllUsers } = require('../models/user');
+const { addUser, getAllUsers, changePemission } = require('../models/user');
 
 const { getDestinations, deleteDestination } = require('../models/destination');
 
@@ -40,15 +40,15 @@ router.get('/getUsers', async (req, res) => {
   res.json(results);
 });
 
-router.patch('/togglePermission', async (req, res) => {
-  const { password } = req.query;
-  const { username, permission } = req.session.user;
+router.put('/togglePermission', async (req, res) => {
+  const { userId, level } = req.query;
+  const { permission } = req.session.user;
 
   if (permission !== 'Admin') {
     res.sendStatus(403);
   }
 
-  const success = await changePassword(username, password);
+  const success = await changePemission(userId, level); // await function (userId);
 
   if (success) {
     res.sendStatus(200);

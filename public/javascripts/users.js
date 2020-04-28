@@ -1,16 +1,14 @@
-function togglePermissions(id) {
-  const url = `../api/admin/togglePermission?userId=${id}`;
-  fetch(url, { method: 'patch' })
+function togglePermissions(id, level) {
+  const url = `../api/admin/togglePermission?userId=${id}&level=${level}`;
+  fetch(url, { method: 'put' })
     .then((response) => {
       if (response.status === 200) {
-        return response.json();
+        const row = document.getElementById(id);
+        const permissionTd = row.getElementsByClassName('permission')[0];
+        permissionTd.innerText = (level === 'Admin') ? 'Staff' : 'Admin';
+        return;
       }
-      alert('Error changing permission');
-    })
-    .then((response) => {
-      const row = document.getElementById(id);
-      const permissionTd = row.getElementsByClassName('permission')[0];
-      permissionTd.innerText = response.permission;
+      throw new Error('Error changing permission');
     })
     .catch((err) => console.log(err));
 }
@@ -53,7 +51,7 @@ function addRow(entry, count) {
   editBtn.innerHTML = '<button class="btn edit" type="button" id="searchButton"> <i class="material-icons">edit</i ></button >';
   deleteBtn.innerHTML = '<button class="btn delete" type="button" id="searchButton"> <i class="material-icons">delete</i ></button >';
 
-  editBtn.addEventListener('click', () => togglePermissions(entryId));
+  editBtn.addEventListener('click', () => togglePermissions(entryId, entry.permission));
   deleteBtn.addEventListener('click', () => deleteUser(entryId));
 
   tr.appendChild(id);

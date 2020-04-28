@@ -142,5 +142,23 @@ async function checkPassword(user, password) {
   return false
 }
 
+async function changePemission(userId, permission) {
 
-module.exports = { authenticateUser, getUserById, getUserByUsername, addUser, changePassword, getAllUsers, checkPassword }
+  const newPermission = (permission == 'Admin') ? 1 : 2;
+
+  const result = await db.query('SELECT COUNT(userid) FROM users WHERE permission=$1', [2]);
+  const { count } = result.rows[0];
+
+  if (count < 2 && permission == 'Admin') {
+    return false;
+  }
+
+  const query = 'UPDATE users SET permission=$1 WHERE userid=$2 RETURNING *;';
+  const { rows } = await db.query(query, [newPermission, userId]);
+
+  return rows.length > 0;
+}
+
+
+
+module.exports = { authenticateUser, getUserById, getUserByUsername, addUser, changePassword, getAllUsers, checkPassword, changePemission }
