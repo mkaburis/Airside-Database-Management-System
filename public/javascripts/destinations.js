@@ -7,10 +7,32 @@ function handleErrors(response) {
   return response;
 }
 
-function getAirportCode(htmlRow) {
-  const htmlValue = htmlRow.getElementsByTagName('td')[0];
+function getAirportInfo(htmlRow, i) {
+  const htmlValue = htmlRow.getElementsByTagName('td')[i];
   const airportCode = htmlValue.innerText;
   return airportCode;
+}
+
+function updateDestination(data) {
+
+
+}
+
+function prepInputFields(htmlRow) {
+  const editAirportCode = document.getElementById('editAirportCode');
+  const editAirportName = document.getElementById('editAirportName');
+  const editCity = document.getElementById('editCity');
+  const editAdminDiv = document.getElementById('editAdministrativeDivision');
+  const editCountry = document.getElementById('editCountry');
+
+  editAirportCode.value = getAirportInfo(htmlRow, 0);
+  editAirportName.value = getAirportInfo(htmlRow, 1);
+  editCity.value = getAirportInfo(htmlRow, 2);
+  editAdminDiv.value = getAirportInfo(htmlRow, 3);
+  editCountry.value = getAirportInfo(htmlRow, 4);
+  // Move the input fields
+  M.updateTextFields();
+
 }
 
 function removeDestination(data) {
@@ -44,14 +66,11 @@ function deleteDestination(elem) {
   tr = Array.prototype.slice.call(tr);
   rowVal = tr.indexOf(trElement);
   const rowData = document.getElementsByTagName('tr');
-  console.log(rowData[rowVal]);
   const rowInformation = rowData[rowVal];
-  const airportCode = getAirportCode(rowInformation);
-  console.log(airportCode);
-  const Modalelem = document.querySelector('.modal');
-  const instance = M.Modal.init(Modalelem);
-  // Get delete
-  const acceptBtn = document.getElementById('accepteDelete');
+  const airportCode = getAirportInfo(rowInformation, 0);
+  const Modalelem = document.querySelectorAll('.modal');
+  const instance = M.Modal.init(Modalelem[0]);
+  const acceptBtn = document.getElementById('acceptDelete');
 
   acceptBtn.addEventListener('click', () => { removeDestination(airportCode); });
 
@@ -60,12 +79,23 @@ function deleteDestination(elem) {
 
 // eslint-disable-next-line no-unused-vars
 function editDestination(elem) {
+  const modal = document.getElementsByClassName('modal');
   const trElement = elem.parentElement.parentElement;
   let tr = document.getElementsByTagName('tr');
   tr = Array.prototype.slice.call(tr);
   rowVal = tr.indexOf(trElement);
   const rowData = document.getElementsByTagName('tr');
+  const rowInformation = rowData[rowVal];
+  const airportCode = getAirportInfo(rowInformation, 0);
   console.log(rowData[rowVal]);
+  const Modalelem = document.querySelectorAll('.modal');
+  const instance = M.Modal.init(Modalelem[1]);
+  const editBtn = document.getElementById('acceptEdit');
+
+  prepInputFields(rowInformation);
+
+  editBtn.addEventListener('click', () => { updateDestination(airportCode); });
+  instance.open();
 }
 
 function addRow(entry, count) {
@@ -93,8 +123,8 @@ function addRow(entry, count) {
   city.innerText = entry.city;
   administrativeDivision.innerText = entry.administrativeDivision;
   country.innerText = entry.country;
-  editBtn.innerHTML = '<button class="btn orange modal-trigger" type="button" id="editButton" onclick="editDestination(this)"> <i class="material-icons">edit</i ></button>';
-  deleteBtn.innerHTML = '<button class="btn red modal-trigger" type="button" id="deleteButton" onclick="deleteDestination(this)"> <i class="material-icons">delete</i ></button>';
+  editBtn.innerHTML = '<data-target="editModal" class="btn orange modal-trigger" type="button" onclick="editDestination(this)"> <i class="material-icons">edit</i ></button>';
+  deleteBtn.innerHTML = '<data-target="deleteModal" class="btn red modal-trigger" type="button" onclick="deleteDestination(this)"> <i class="material-icons">delete</i ></button>';
 
   tr.appendChild(airportCode);
   tr.appendChild(airportName);
