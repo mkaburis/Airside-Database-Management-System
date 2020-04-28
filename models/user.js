@@ -146,10 +146,9 @@ async function changePemission(userId, permission) {
 
   const newPermission = (permission == 'Admin') ? 1 : 2;
 
-  const result = await db.query('SELECT COUNT(userid) FROM users WHERE permission=$1', [2]);
-  const { count } = result.rows[0];
+  const deletableAdmin = await checkNumAdmins()
 
-  if (count < 2 && permission == 'Admin') {
+  if (!deletableAdmin && permission == 'Admin') {
     return false;
   }
 
@@ -159,6 +158,30 @@ async function changePemission(userId, permission) {
   return rows.length > 0;
 }
 
+async function deleteUser(userId, permission) {
+  const deletableAdmin = await checkNumAdmins()
+
+  if (!deletableAdmin && permission == 'Admin') {
+    return false;
+  }
+
+  const query = 'DELETE FROM users WHERE userid=$1 RETURNING *;';
+  const { rows } = await db.query(query, [userId]);
+
+  return rows.length > 0;
+}
+
+async function checkNumAdmins() {
+  const result = await db.query('SELECT COUNT(userid) FROM users WHERE permission=$1', [2])
+    .then((response) => response.rows[0])
+    .then((response) => response.count);
+
+  if (result < 2) {
+    return false;
+  }
+
+  return true;
+}
 
 
-module.exports = { authenticateUser, getUserById, getUserByUsername, addUser, changePassword, getAllUsers, checkPassword, changePemission }
+module.exports = { authenticateUser, getUserById, getUserByUsername, addUser, changePassword, getAllUsers, checkPassword, changePemission, deleteUser }

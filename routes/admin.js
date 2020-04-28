@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { addUser, getAllUsers, changePemission } = require('../models/user');
+const { addUser, getAllUsers, changePemission, deleteUser } = require('../models/user');
 
 const { getDestinations, deleteDestination } = require('../models/destination');
 
@@ -56,6 +56,24 @@ router.put('/togglePermission', async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+router.delete('/deleteUser', async (req, res) => {
+  const { userId } = req.query;
+  const { id, permission } = req.session.user;
+
+  if (userId === id) {
+    res.sendStatus(403);
+  }
+
+  const success = await deleteUser(userId, permission); // await function (userId);
+
+  if (success) {
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(500);
+  }
+});
+
 
 // Destination APIs
 

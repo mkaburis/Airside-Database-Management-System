@@ -1,4 +1,6 @@
-function togglePermissions(id, level) {
+function togglePermissions(id) {
+  const row = document.getElementById(id);
+  const level = row.getElementsByClassName('permission')[0].innerText;
   const url = `../api/admin/togglePermission?userId=${id}&level=${level}`;
   fetch(url, { method: 'put' })
     .then((response) => {
@@ -51,7 +53,7 @@ function addRow(entry, count) {
   editBtn.innerHTML = '<button class="btn edit" type="button" id="searchButton"> <i class="material-icons">edit</i ></button >';
   deleteBtn.innerHTML = '<button class="btn delete" type="button" id="searchButton"> <i class="material-icons">delete</i ></button >';
 
-  editBtn.addEventListener('click', () => togglePermissions(entryId, entry.permission));
+  editBtn.addEventListener('click', () => togglePermissions(entryId));
   deleteBtn.addEventListener('click', () => deleteUser(entryId));
 
   tr.appendChild(id);
