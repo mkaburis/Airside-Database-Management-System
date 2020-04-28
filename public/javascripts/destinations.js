@@ -1,35 +1,44 @@
+function handleErrors(response) {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
+}
+
 function addRow(entry, count) {
+
+  console.log(entry.airportCode);
   const tr = document.createElement('tr');
 
-  const airportcode = document.createElement('td');
-  const airportname = document.createElement('td');
+  const airportCode = document.createElement('td');
+  const airportName = document.createElement('td');
   const city = document.createElement('td');
-  const administrativedivision = document.createElement('td');
+  const administrativeDivision = document.createElement('td');
   const country = document.createElement('td');
   const editBtn = document.createElement('td');
   const deleteBtn = document.createElement('td');
 
-  airportcode.classList.add('center-align');
-  airportname.classList.add('center-align');
+  airportCode.classList.add('center-align');
+  airportName.classList.add('center-align');
   city.classList.add('center-align');
-  administrativedivision.classlist.add('center-align');
-  country.classlist.add('center-align');
+  administrativeDivision.classList.add('center-align')
+  country.classList.add('center-align');
   editBtn.classList.add('center-align');
   deleteBtn.classList.add('center-align');
 
-  tr.id = entry.id;
-  airportcode.innerText = entry.airportcode;
-  airportname.innerText = entry.airportname;
+  tr.id = count;
+  airportCode.innerText = entry.airportCode;
+  airportName.innerText = entry.airportName;
   city.innerText = entry.city;
-  administrativedivision.innerText = entry.administrativedivision;
+  administrativeDivision.innerText = entry.administrativeDivision;
   country.innerText = entry.country;
   editBtn.innerHTML = '<button class="btn" type="button" id="searchButton"> <i class="material-icons right">edit</i ></button >';
   deleteBtn.innerHTML = '<button class="btn" type="button" id="searchButton"> <i class="material-icons right">delete</i ></button >';
 
-  tr.appendChild(airportcode);
-  tr.appendChild(airportname);
+  tr.appendChild(airportCode);
+  tr.appendChild(airportName);
   tr.appendChild(city);
-  tr.appendChild(administrativedivision);
+  tr.appendChild(administrativeDivision);
   tr.appendChild(country);
   tr.appendChild(editBtn);
   tr.appendChild(deleteBtn);
@@ -37,42 +46,50 @@ function addRow(entry, count) {
   return tr;
 }
 
-function populateTable(list) {
+function populateDestinationTable(list) {
   const tbody = document.getElementById('tBody');
   const label = document.getElementById('noDestinationsFound');
   tbody.innerHTML = '';
 
-  if (list === undefined || list.size === 0) {
+  if (list === undefined || list.count === 0) {
     label.style.display = 'block';
     return;
   }
   label.style.display = 'none';
 
+  // console.log(list.destinations[0]);
 
-  list.forEach((element, index) => {
+  list.destinations.forEach((element, index) => {
     const tr = addRow(element, index);
     tbody.appendChild(tr);
   });
+
+
+  // list.destinations.forEach((element, index) => {
+  //   const tr = addRow(element, index);
+  //   tbody.appendChild(tr);
+  // });
 }
 
 function searchForDestinations() {
-  const airportCode = document.getElementById('flightNo').value;
-  const city = document.getElementById('depatureAirport').value;
-  const adminDivision = document.getElementById('arrivalAirport').value;
-  const country = document.getElementById('arrivalAirport').value;
+  const airportCode = document.getElementById('airportCode').value;
+  const city = document.getElementById('city').value;
+  const adminDivision = document.getElementById('administrativeDivision').value;
+  const country = document.getElementById('country').value;
 
 
-  const url = `../api/admin/getDestinations?permission=${selectedValue}`;
-  fetch(url, { method: 'GET' })
-    .then((response) => {
-      if (response.status === 200) {
-        return response.json();
-      }
-      alert('Error adding user');
-      throw response.statusText;
+  const url = `../api/admin/getDestinations?airportCode=${airportCode}&city=${city}&adminDivision=${adminDivision}`
+  + `&country=${country}`;
+  fetch(url)
+    .then(handleErrors)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      populateDestinationTable(data);
     })
-    .then((response) => populateTable(response))
-    .catch((err) => console.log(err));
+    .catch((error) => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
 }
 
 function addDestination() {
@@ -99,15 +116,14 @@ function addDestination() {
 }
 
 function addEventListeners() {
-  const saveButton = document.getElementById('saveButton');
+  // const saveButton = document.getElementById('saveButton');
   const searchButton = document.getElementById('searchButton');
 
-  saveButton.addEventListener('click', addDestination);
+  // saveButton.addEventListener('click', addDestination);
   searchButton.addEventListener('click', searchForDestinations);
 }
 
 
 window.addEventListener('DOMContentLoaded', () => {
-  addEventListeners();
-  searchForDestinations();
+  // addEventListeners();
 }, false);

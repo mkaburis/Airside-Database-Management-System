@@ -57,25 +57,26 @@ router.get('/getUsers', async (req, res) => {
 
 /* GET destinations listing */
 router.get('/getDestinations', async (req, res) => {
-  let {
-    airportCode, city, administrativeDivision, country } = req.query;
+  let { airportCode, city, administrativeDivision, country } = req.query;
 
-  if (airportCode === null) {
+  if (airportCode === '') {
     airportCode = '%';
   }
 
-  if (city === null) {
+  if (city === '') {
     city = '%';
   }
 
-  if (administrativeDivision === null) {
+  if (administrativeDivision === '') {
     administrativeDivision = '%';
   }
 
-  if (country === null) {
+  if (country === '') {
     country = '%';
   }
 
+  // This line works for some reason
+  // const queryResults = await getDestinations('TPA', '%', '%', '%');
   const queryResults = await getDestinations(airportCode, city, administrativeDivision, country);
 
   if (queryResults.count < 1) {
