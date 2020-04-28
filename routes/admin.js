@@ -95,7 +95,7 @@ router.get('/getDestinations', async (req, res) => {
 router.post('/deleteDestination', async (req, res) => {
   const { airportCode } = req.query;
 
-  const success = deleteDestination(airportCode);
+  const success = await deleteDestination(airportCode);
 
   if (success === true) {
     return res.status(200).json({ message: 'Destination deleted successfully' });

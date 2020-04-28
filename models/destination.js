@@ -45,7 +45,9 @@ async function getDestinations(inputAirportCode, inputCity,
     }
 
 async function deleteDestination(inputAirportCode) {
-    const query = 'DELETE FROM destinations WHERE airportcode = \'$1\' RETURNING *;';
+    const query = 'DELETE FROM destinations WHERE airportcode = $1 RETURNING *;';
+
+    console.log(query);
 
     const result = await db.query(query, [inputAirportCode])
     .then((res) => {

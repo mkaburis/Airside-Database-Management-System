@@ -7,8 +7,34 @@ function handleErrors(response) {
   return response;
 }
 
+function getAirportCode(htmlRow) {
+  const htmlValue = htmlRow.getElementsByTagName('td')[0];
+  const airportCode = htmlValue.innerText;
+  return airportCode;
+}
+
 function removeDestination(data) {
-  console.log('I did something');
+  console.log(`This is it ${data}`);
+  const url = `../api/admin/deleteDestination?airportCode=${data}`;
+
+  fetch(url, {
+    method: 'POST'
+  })
+    // eslint-disable-next-line consistent-return
+    .then((response) => {
+      if (response.status !== 200) {
+        alert('Could not delete destination!');
+      } else {
+        return response.json;
+      }
+    })
+    .then((response) => {
+      if (response.deleteDestination === true) {
+        alert('Destination Deleted');
+      }
+      // eslint-disable-next-line no-restricted-globals
+      location.reload();
+    }).catch((err) => console.log(err));
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -20,13 +46,16 @@ function deleteDestination(elem) {
   const rowData = document.getElementsByTagName('tr');
   console.log(rowData[rowVal]);
   const rowInformation = rowData[rowVal];
+  const airportCode = getAirportCode(rowInformation);
+  console.log(airportCode);
   const Modalelem = document.querySelector('.modal');
   const instance = M.Modal.init(Modalelem);
-  instance.open();
   // Get delete
   const acceptBtn = document.getElementById('accepteDelete');
 
-  acceptBtn.addEventListener('click', removeDestination(rowInformation));
+  acceptBtn.addEventListener('click', () => { removeDestination(airportCode); });
+
+  instance.open();
 }
 
 // eslint-disable-next-line no-unused-vars
