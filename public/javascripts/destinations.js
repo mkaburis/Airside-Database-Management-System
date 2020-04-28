@@ -1,3 +1,5 @@
+let rowVal;
+
 function handleErrors(response) {
   if (!response.ok) {
     throw Error(response.statusText);
@@ -5,9 +7,27 @@ function handleErrors(response) {
   return response;
 }
 
-function addRow(entry, count) {
+// eslint-disable-next-line no-unused-vars
+function deleteDestination(elem) {
+  const trElement = elem.parentElement.parentElement;
+  let tr = document.getElementsByTagName('tr');
+  tr = Array.prototype.slice.call(tr);
+  rowVal = tr.indexOf(trElement);
+  const rowData = document.getElementsByTagName('tr');
+  console.log(rowData[rowVal]);
+}
 
-  console.log(entry.airportCode);
+// eslint-disable-next-line no-unused-vars
+function editDestination(elem) {
+  const trElement = elem.parentElement.parentElement;
+  let tr = document.getElementsByTagName('tr');
+  tr = Array.prototype.slice.call(tr);
+  rowVal = tr.indexOf(trElement);
+  const rowData = document.getElementsByTagName('tr');
+  console.log(rowData[rowVal]);
+}
+
+function addRow(entry, count) {
   const tr = document.createElement('tr');
 
   const airportCode = document.createElement('td');
@@ -21,7 +41,7 @@ function addRow(entry, count) {
   airportCode.classList.add('center-align');
   airportName.classList.add('center-align');
   city.classList.add('center-align');
-  administrativeDivision.classList.add('center-align')
+  administrativeDivision.classList.add('center-align');
   country.classList.add('center-align');
   editBtn.classList.add('center-align');
   deleteBtn.classList.add('center-align');
@@ -32,8 +52,8 @@ function addRow(entry, count) {
   city.innerText = entry.city;
   administrativeDivision.innerText = entry.administrativeDivision;
   country.innerText = entry.country;
-  editBtn.innerHTML = '<button class="btn orange" type="button" id="editButton"> <i class="material-icons">edit</i ></button >';
-  deleteBtn.innerHTML = '<button class="btn red" type="button" id="searchButton"> <i class="material-icons">delete</i ></button >';
+  editBtn.innerHTML = '<button class="btn orange" type="button" id="editButton" onclick="deleteDestination(this)"> <i class="material-icons">edit</i ></button>';
+  deleteBtn.innerHTML = '<button class="btn red" type="button" id="deleteButton" onclick="editDestination(this)"> <i class="material-icons">delete</i ></button>';
 
   tr.appendChild(airportCode);
   tr.appendChild(airportName);
@@ -58,24 +78,13 @@ function populateDestinationTable(list) {
   }
   label.style.display = 'none';
 
-  // console.log(list.destinations[0]);
-
   document.getElementById('numDestinations').innerHTML = 'test';
   list.destinations.forEach((element, index) => {
     const tr = addRow(element, index);
     tbody.appendChild(tr);
   });
 
-  count.innerHTML = `<em>${list.count} results returned</em>`
-
-  console.log(list.count);
-
-  
-
-  // list.destinations.forEach((element, index) => {
-  //   const tr = addRow(element, index);
-  //   tbody.appendChild(tr);
-  // });
+  count.innerHTML = `<em>${list.count} results returned</em>`;
 }
 
 function searchForDestinations() {
@@ -121,6 +130,7 @@ function addDestination() {
     })
     .catch((err) => console.log(err));
 }
+
 
 function addEventListeners() {
   // const saveButton = document.getElementById('saveButton');
