@@ -6,6 +6,8 @@ const { getDestinations, deleteDestination } = require('../models/destination');
 
 const router = express.Router();
 
+// User APIs
+
 router.post('/addUser', async (req, res) => {
   const { username, permission } = req.query;
   const password = 'password';
@@ -16,23 +18,6 @@ router.post('/addUser', async (req, res) => {
   }
 
   const success = await addUser(username, password, permission);
-
-  if (success) {
-    res.sendStatus(200);
-  } else {
-    res.sendStatus(500);
-  }
-});
-
-router.post('/changeUserPassword', async (req, res) => {
-  const { password } = req.body;
-  const { username, permission } = req.session.user;
-
-  if (permission !== 'Admin') {
-    res.sendStatus(403);
-  }
-
-  const success = await changePassword(username, password);
 
   if (success) {
     res.sendStatus(200);
@@ -54,6 +39,25 @@ router.get('/getUsers', async (req, res) => {
 
   res.json(results);
 });
+
+router.patch('/togglePermission', async (req, res) => {
+  const { password } = req.query;
+  const { username, permission } = req.session.user;
+
+  if (permission !== 'Admin') {
+    res.sendStatus(403);
+  }
+
+  const success = await changePassword(username, password);
+
+  if (success) {
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(500);
+  }
+});
+
+// Destination APIs
 
 /* GET destinations listing */
 router.get('/getDestinations', async (req, res) => {
