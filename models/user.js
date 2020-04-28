@@ -113,7 +113,7 @@ async function changePassword(user, password) {
 }
 
 async function getAllUsers(permission) {
-  let query = 'SELECT username, permission FROM users';
+  let query = 'SELECT userid, username, permission FROM users';
   let params = []
   if (permission === '1' || permission === '2') {
     query += ' WHERE permission=$1';
@@ -124,7 +124,7 @@ async function getAllUsers(permission) {
   const result = await db.query(query, params)
     .then((res) => res.rows)
     .then((res) => res.map((entry) => {
-      const user = new User(null, entry.username, '', entry.permission);
+      const user = new User(entry.userid, entry.username, '', entry.permission);
       return user;
     }));
 

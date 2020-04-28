@@ -1,3 +1,34 @@
+function togglePermissions(id) {
+  const url = `../api/admin/togglePermission?userId=${id}`;
+  fetch(url, { method: 'patch' })
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json();
+      }
+      alert('Error changing permission');
+    })
+    .then((response) => {
+      const row = document.getElementById(id);
+      const permissionTd = row.getElementsByClassName('permission')[0];
+      permissionTd.innerText = response.permission;
+    })
+    .catch((err) => console.log(err));
+}
+
+function deleteUser(id) {
+  const url = `../api/admin/deleteUser?userId=${id}`;
+  fetch(url, { method: 'DELETE' })
+    .then((response) => {
+      if (response.status === 200) {
+        const row = document.getElementById(id);
+        row.innerHTML = '';
+        return;
+      }
+      alert('Error deleting user');
+    })
+    .catch((err) => console.log(err));
+}
+
 function addRow(entry, count) {
   const tr = document.createElement('tr');
 
@@ -7,18 +38,23 @@ function addRow(entry, count) {
   const editBtn = document.createElement('td');
   const deleteBtn = document.createElement('td');
 
+  const entryId = entry.id;
   id.classList.add('center-align');
   username.classList.add('center-align');
   permission.classList.add('center-align');
   editBtn.classList.add('center-align');
   deleteBtn.classList.add('center-align');
 
-  tr.id = entry.id;
+  tr.id = entryId;
   id.innerText = count;
   username.innerText = entry.username;
   permission.innerText = entry.permission;
-  editBtn.innerHTML = '<button class="btn" type="button" id="searchButton"> <i class="material-icons right">edit</i ></button >';
-  deleteBtn.innerHTML = '<button class="btn" type="button" id="searchButton"> <i class="material-icons right">delete</i ></button >';
+  permission.classList.add('permission');
+  editBtn.innerHTML = '<button class="btn edit" type="button" id="searchButton"> <i class="material-icons">edit</i ></button >';
+  deleteBtn.innerHTML = '<button class="btn delete" type="button" id="searchButton"> <i class="material-icons">delete</i ></button >';
+
+  editBtn.addEventListener('click', () => togglePermissions(entryId));
+  deleteBtn.addEventListener('click', () => deleteUser(entryId));
 
   tr.appendChild(id);
   tr.appendChild(username);
@@ -63,7 +99,6 @@ function searchForUsers() {
     })
     .then((response) => populateTable(response))
     .catch((err) => console.log(err));
-
 }
 
 function addUser() {
