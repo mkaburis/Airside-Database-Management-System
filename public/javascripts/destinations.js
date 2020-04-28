@@ -32,8 +32,8 @@ function addRow(entry, count) {
   city.innerText = entry.city;
   administrativeDivision.innerText = entry.administrativeDivision;
   country.innerText = entry.country;
-  editBtn.innerHTML = '<button class="btn" type="button" id="searchButton"> <i class="material-icons right">edit</i ></button >';
-  deleteBtn.innerHTML = '<button class="btn" type="button" id="searchButton"> <i class="material-icons right">delete</i ></button >';
+  editBtn.innerHTML = '<button class="btn orange" type="button" id="editButton"> <i class="material-icons">edit</i ></button >';
+  deleteBtn.innerHTML = '<button class="btn red" type="button" id="searchButton"> <i class="material-icons">delete</i ></button >';
 
   tr.appendChild(airportCode);
   tr.appendChild(airportName);
@@ -49,6 +49,7 @@ function addRow(entry, count) {
 function populateDestinationTable(list) {
   const tbody = document.getElementById('tBody');
   const label = document.getElementById('noDestinationsFound');
+  const count = document.getElementById('numDestinations');
   tbody.innerHTML = '';
 
   if (list === undefined || list.count === 0) {
@@ -59,11 +60,17 @@ function populateDestinationTable(list) {
 
   // console.log(list.destinations[0]);
 
+  document.getElementById('numDestinations').innerHTML = 'test';
   list.destinations.forEach((element, index) => {
     const tr = addRow(element, index);
     tbody.appendChild(tr);
   });
 
+  count.innerHTML = `<em>${list.count} results returned</em>`
+
+  console.log(list.count);
+
+  
 
   // list.destinations.forEach((element, index) => {
   //   const tr = addRow(element, index);
@@ -78,8 +85,8 @@ function searchForDestinations() {
   const country = document.getElementById('country').value;
 
 
-  const url = `../api/admin/getDestinations?airportCode=${airportCode}&city=${city}&adminDivision=${adminDivision}`
-  + `&country=${country}`;
+  const url = `../api/admin/getDestinations?airportCode=${airportCode}&city=${city}`
+  + `&administrativeDivision=${adminDivision}&country=${country}`;
   fetch(url)
     .then(handleErrors)
     .then((response) => response.json())
@@ -125,5 +132,6 @@ function addEventListeners() {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-  // addEventListeners();
+  // document.getElementById('numDestinations').innerHTML = 'hello all';
+  addEventListeners();
 }, false);
