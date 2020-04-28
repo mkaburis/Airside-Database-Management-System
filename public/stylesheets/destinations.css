@@ -68,3 +68,8 @@ i.icon-black {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
+.inline-icon {
+    vertical-align: middle;
+    margin-right: 10px;
+  }

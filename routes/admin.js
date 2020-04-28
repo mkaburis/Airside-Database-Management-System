@@ -2,7 +2,7 @@ const express = require('express');
 
 const { addUser, changePassword, getAllUsers } = require('../models/user');
 
-const { getDestinations } = require('../models/destination');
+const { getDestinations, deleteDestination } = require('../models/destination');
 
 const router = express.Router();
 
@@ -90,6 +90,17 @@ router.get('/getDestinations', async (req, res) => {
   }
 
   return res.send(queryResults);
+});
+
+router.post('/deleteDestination', async (req, res) => {
+  const { airportCode } = req.query;
+
+  const success = deleteDestination(airportCode);
+
+  if (success === true) {
+    return res.status(200).json({ message: 'Destination deleted successfully' });
+  }
+  return res.status(500).json({ message: 'Error deleting destination' });
 });
 
 module.exports = router;

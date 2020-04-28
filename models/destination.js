@@ -44,4 +44,22 @@ async function getDestinations(inputAirportCode, inputCity,
             return destinationObject;
     }
 
-module.exports = { getDestinations };
+async function deleteDestination(inputAirportCode) {
+    const query = 'DELETE FROM destinations WHERE airportcode = \'$1\' RETURNING *;';
+
+    const result = await db.query(query, [inputAirportCode])
+    .then((res) => {
+        return res.rows;
+    }).then((res) => res.map((entry) => {
+        const destination = new Destinations(entry.airportcode, entry.airportname, entry.city, 
+            entry.administrativedivision, entry.country);
+    }));
+
+    if (result.length < 1) {
+        return false;
+    }
+
+    return true;
+}
+
+module.exports = { getDestinations, deleteDestination };

@@ -7,6 +7,10 @@ function handleErrors(response) {
   return response;
 }
 
+function removeDestination(data) {
+  console.log('I did something');
+}
+
 // eslint-disable-next-line no-unused-vars
 function deleteDestination(elem) {
   const trElement = elem.parentElement.parentElement;
@@ -15,6 +19,14 @@ function deleteDestination(elem) {
   rowVal = tr.indexOf(trElement);
   const rowData = document.getElementsByTagName('tr');
   console.log(rowData[rowVal]);
+  const rowInformation = rowData[rowVal];
+  const Modalelem = document.querySelector('.modal');
+  const instance = M.Modal.init(Modalelem);
+  instance.open();
+  // Get delete
+  const acceptBtn = document.getElementById('accepteDelete');
+
+  acceptBtn.addEventListener('click', removeDestination(rowInformation));
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -52,8 +64,8 @@ function addRow(entry, count) {
   city.innerText = entry.city;
   administrativeDivision.innerText = entry.administrativeDivision;
   country.innerText = entry.country;
-  editBtn.innerHTML = '<button class="btn orange" type="button" id="editButton" onclick="deleteDestination(this)"> <i class="material-icons">edit</i ></button>';
-  deleteBtn.innerHTML = '<button class="btn red" type="button" id="deleteButton" onclick="editDestination(this)"> <i class="material-icons">delete</i ></button>';
+  editBtn.innerHTML = '<button class="btn orange modal-trigger" type="button" id="editButton" onclick="editDestination(this)"> <i class="material-icons">edit</i ></button>';
+  deleteBtn.innerHTML = '<button class="btn red modal-trigger" type="button" id="deleteButton" onclick="deleteDestination(this)"> <i class="material-icons">delete</i ></button>';
 
   tr.appendChild(airportCode);
   tr.appendChild(airportName);
