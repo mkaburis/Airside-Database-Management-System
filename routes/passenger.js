@@ -1,56 +1,45 @@
 const { Router } = require('express');
-const db = require('../db/postgres');
+const { getPassengerById } = require('../models/passenger');
+const { getPassengerFlightList, getPassengerFlight } = require('../models/flightLog');
 
 const router = Router();
 
 /* GET users info. */
 router.get('/:userId', async (req, res) => {
   const { userId } = req.params;
-  const {
-    rows
-  } = await db.query('SELECT * FROM passengers WHERE passengerid = $1', [
-    userId
-  ]);
-  if (rows.length < 1) {
-    res.sendStatus(404).json({ error: 'user\'s information not found' });
-  } else {
-    res.send(rows[0]);
+  const passenger = await getPassengerById(userId);
+
+  if (passenger == null) {
+    return res.status(404).json({ message: 'Passenger not found' });
   }
+
+  res.json(passenger);
 });
 
 /* Gets user's information about a specific flight */
 router.get('/:userId/flights/:flightId', async (req, res) => {
   const { flightId, userId } = req.params;
-  const { rows } = await db.query(
-    'SELECT * FROM passengers'
-    + ' INNER JOIN passengerflights ON passengers.passengerid = passengerflights.passengerid'
-    + ' INNER JOIN flightlogs ON passengerflights.flightId = flightlogs.flightId'
-    + ' WHERE passengers.passengerid = $1 AND flightlogs.flightId = $2',
-    [userId, flightId]
-  );
 
-  if (rows.length < 1) {
-    res.sendStatus(404).json({ error: `user's information about flight ${flightId} not found` });
-  } else {
-    res.send(rows[0]);
+  const result = await getPassengerFlight(userId, flightId);
+
+  if (result == null) {
+    return res.status(404).json({ message: 'Passenger not found' });
   }
+
+  res.json(result);
 });
 
 /* Get a list of user's flights */
 router.get('/:userId/flights', async (req, res) => {
   const { userId } = req.params;
-  const { rows } = await db.query(
-    'SELECT * FROM passengers'
-    + ' INNER JOIN passengerflights ON passengers.passengerid = passengerflights.passengerid'
-    + ' INNER JOIN flightlogs ON passengerflights.flightId = flightlogs.flightId'
-    + ' WHERE passengers.passengerid = $1',
-    [userId]
-  );
-  if (rows.length < 1) {
-    res.sendStatus(404).json({ error: 'user\'s flight information not found' });
-  } else {
-    res.send(rows[0]);
+
+  const result = await getPassengerFlightList(userId);
+
+  if (result == null) {
+    return res.status(404).json({ message: 'No flights found' });
   }
+
+  res.json(result);
 });
 
 module.exports = router;

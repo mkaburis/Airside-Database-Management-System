@@ -23,6 +23,32 @@ class Flights {
 
 }
 
+class PassengerFlight {
+  id;
+  flightNumber;
+  arrivalTime;
+  departureTime;
+  arrivalCity;
+  departureCity;
+  gateNumber;
+  isDelayed;
+  checkedIn;
+  connecting;
+
+  constructor(id, flightNo, arrivalTime, departureTime, arrivalCity, departureCity, gateNumber, isDelayed, checkedIn, connecting) {
+    this.id = id;
+    this.flightNumber = flightNo;
+    this.arrivalTime = arrivalTime;
+    this.departureTime = departureTime;
+    this.arrivalCity = arrivalCity;
+    this.departureCity = departureCity;
+    this.gateNumber = gateNumber;
+    this.isDelayed = isDelayed
+    this.checkedIn = checkedIn;
+    this.connecting = connecting;
+  }
+}
+
 function extractFlightNo(flightNo) {
   const reAirline = /\d*[a-zA-Z]+\d*/;
   const reFlight = /\d{2,}/;
@@ -48,11 +74,49 @@ async function getFlights(airline, flightNum, arrivalAirport, departureAirport) 
     })
     .then((res) => res.map((entry) => {
       const flightCode = `${entry.airlinecode} ${entry.flightno}`
-      const flight = new Flights(entry.flightid, flightCode, entry.arrivaltime, entry.departuretime, entry.fliesto, entry.fliesfrom, entry.gateno, entry.isdelayed);
+      const flight = new Flights(entry.flightid, flightCode, entry.arrivaltime, entry.departuretime,
+        entry.fliesto, entry.fliesfrom, entry.gateno, entry.isdelayed);
       return flight;
     }));
 
   return result;
 }
 
-module.exports = { extractFlightNo, getFlights }
+async function getPassengerFlightList(passengerId) {
+  const query = 'SELECT * FROM passengerflights'
+    + ' INNER JOIN flightlogs ON passengerflights.flightId = flightlogs.flightId'
+    + ' INNER JOIN routes ON routes.routeid = flightlogs.routeid'
+    + ' WHERE passengerflights.passengerid = $1'
+
+  const result = await db.query(query, [passengerId])
+    .then((response) => response.rows)
+    .then((respone) => respone.map((entry) => {
+      const flightCode = `${entry.airlinecode} ${entry.flightno}`
+      const flight = new PassengerFlight(entry.flightid, flightCode, entry.arrivaltime, entry.departuretime,
+        entry.fliesto, entry.fliesfrom, entry.gateno, entry.isdelayed, entry.checkedin, entry.connecting);
+      return flight;
+    }));
+
+  return result;
+}
+
+async function getPassengerFlight(passengerId, flightId) {
+  const query = 'SELECT * FROM passengers'
+    + ' INNER JOIN passengerflights ON passengers.passengerid = passengerflights.passengerid'
+    + ' INNER JOIN flightlogs ON passengerflights.flightId = flightlogs.flightId'
+    + ' INNER JOIN routes ON routes.routeid = flightlogs.routeid'
+    + ' WHERE passengers.passengerid = $1 AND flightlogs.flightId = $2';
+
+  const result = await db.query(query, [passengerId, flightId])
+    .then((response) => response.rows[0])
+    .then((entry) => {
+      const flightCode = `${entry.airlinecode} ${entry.flightno}`
+      const flight = new PassengerFlight(entry.flightid, flightCode, entry.arrivaltime, entry.departuretime,
+        entry.fliesto, entry.fliesfrom, entry.gateno, entry.isdelayed, entry.checkedin, entry.connecting);
+      return flight;
+    });
+
+  return result;
+}
+
+module.exports = { extractFlightNo, getFlights, getPassengerFlightList, getPassengerFlight }

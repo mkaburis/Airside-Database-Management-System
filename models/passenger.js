@@ -1,3 +1,5 @@
+const db = require('../db/postgres');
+
 class Passenger {
   id;
   firstName;
@@ -23,21 +25,19 @@ class Passenger {
 }
 
 async function getPassengerById(id) {
-  const result = await db.query(
-    'SELECT * FROM passenger WHERE passengerid=$1',
-    [id]
-  )
+  const query = 'SELECT * FROM passengers WHERE passengerid=$1';
+
+  const result = await db.query(query, [id])
     .then((res) => res.rows[0])
+    .then((result) => new Passenger(result.passengerid, result.firstname, result.lastname, result.dob,
+      result.nationality, result.dlno, result.passportno, result.tsapre, result.homeairport))
     .catch((err) => console.error(err.stack));
 
   if (result === undefined) {
     return null;
   }
 
-  const passenger = Passenger(result.passengerid, result.firstname, result.lastname, result.dob,
-    result.nationality, result.dlno, result.passportno, result.tsapre, result.homeairport);
-
-  return passenger;
+  return result;
 }
 
 async function addPassenger(passenger) {
@@ -87,7 +87,5 @@ async function deletePassenger(id) {
 
   return true;
 }
-
-
 
 module.exports = { getPassengerById, addPassenger, editPassenger, Passenger }
