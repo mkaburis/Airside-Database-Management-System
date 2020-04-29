@@ -114,7 +114,7 @@ router.get('/getDestinations', async (req, res) => {
   return res.send(queryResults);
 });
 
-router.post('/deleteDestination', async (req, res) => {
+router.delete('/deleteDestination', async (req, res) => {
   const { airportCode } = req.query;
 
   const success = await deleteDestination(airportCode);

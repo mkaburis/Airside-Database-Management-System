@@ -13,7 +13,39 @@ function getAirportInfo(htmlRow, i) {
   return airportCode;
 }
 
-function updateDestination(data) {
+function updateDestination(htmlRow) {
+  const editAirportCode = document.getElementById('editAirportCode');
+  const editAirportName = document.getElementById('editAirportName');
+  const editCity = document.getElementById('editCity');
+  const editAdminDiv = document.getElementById('editAdministrativeDivision');
+  const editCountry = document.getElementById('editCountry');
+
+  // PK absolultely do not change when updating
+  const airpotCode = editAirportCode.value;
+
+  // Potential attributes to be changed
+  let airportName = editAirportName.value;
+  let city = editCity.value;
+  let adminDiv = editAdminDiv;
+  let country = editCountry;
+
+  if (airportName === getAirportInfo(htmlRow, 1)) {
+    airportName = '';
+  }
+
+  if (city === getAirportInfo(htmlRow, 2)) {
+    city = '';
+  }
+
+  if (adminDiv === getAirportInfo(htmlRow, 3)) {
+    adminDiv = '';
+  }
+
+  if (country === getAirportInfo(htmlRow, 4)) {
+    country = '';
+  }
+
+
 
 
 }
@@ -32,15 +64,13 @@ function prepInputFields(htmlRow) {
   editCountry.value = getAirportInfo(htmlRow, 4);
   // Move the input fields
   M.updateTextFields();
-
 }
 
 function removeDestination(data) {
-  console.log(`This is it ${data}`);
   const url = `../api/admin/deleteDestination?airportCode=${data}`;
 
   fetch(url, {
-    method: 'POST'
+    method: 'DELETE'
   })
     // eslint-disable-next-line consistent-return
     .then((response) => {
@@ -87,14 +117,13 @@ function editDestination(elem) {
   const rowData = document.getElementsByTagName('tr');
   const rowInformation = rowData[rowVal];
   const airportCode = getAirportInfo(rowInformation, 0);
-  console.log(rowData[rowVal]);
   const Modalelem = document.querySelectorAll('.modal');
   const instance = M.Modal.init(Modalelem[1]);
   const editBtn = document.getElementById('acceptEdit');
 
   prepInputFields(rowInformation);
 
-  editBtn.addEventListener('click', () => { updateDestination(airportCode); });
+  editBtn.addEventListener('click', () => { updateDestination(rowInformation) });
   instance.open();
 }
 
