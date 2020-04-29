@@ -4,28 +4,41 @@ const { extractFlightNo, getFlights } = require('../models/flightLog');
 const router = express.Router();
 
 /* GET flight listing. */
-/* Will add query parameters later */
 router.get('/simple', async (req, res) => {
-  let { flightNo, departureAirport, arrivalAirport } = req.query;
+  const { flightNo, departureAirport, arrivalAirport } = req.query;
 
-  let { airline, flightNum } = extractFlightNo(flightNo);
+  const { airline, flightNum } = extractFlightNo(flightNo);
 
-  if (airline === null && flightNum === null) {
-    airline = '%';
-    flightNum = '%';
-  }
   if ((flightNum === null && airline !== null) || (flightNum !== null && airline === null)) {
     return res.Status(404).json({ error: 'Flight number must have airline and flight number' });
   }
-  if (arrivalAirport === '') {
-    arrivalAirport = '%';
+
+  const param = [];
+  const values = [];
+
+  if (flightNum !== null) {
+    param.push({ field: 'flightno', op: 'like' });
+    values.push(flightNum.trim());
   }
-  if (
-    departureAirport === '') {
-    departureAirport = '%';
+  if (airline !== null) {
+    param.push({ field: 'airlinecode', op: 'like' });
+    values.push(airline.trim());
   }
 
-  const queryResults = await getFlights(airline, flightNum, arrivalAirport, departureAirport, true);
+  if (arrivalAirport.trim() !== '') {
+    param.push({ field: 'fliesto', op: 'like' });
+    values.push(arrivalAirport.trim());
+  }
+  if (departureAirport.trim() !== '') {
+    param.push({ field: 'fliesfrom', op: 'like' });
+    values.push(departureAirport.trim());
+  }
+
+  param.push({ field: 'isactive', op: '=' });
+  values.push(true);
+
+
+  const queryResults = await getFlights(param, values);
 
   if (queryResults.length < 1) {
     return res.status(404).json({ error: 'No flights found' });
