@@ -237,10 +237,18 @@ function searchForDestinations() {
 }
 
 function addDestination() {
-  const username = document.getElementById('username');
-  const authRadioGroup = document.getElementById('authRadioGroup');
-  const selectedAuth = authRadioGroup.querySelector('input[name="authRadio"]:checked').value;
-  const usernameVal = username.value;
+  const addAirportCode = document.getElementById('addAirportCode');
+  const addAirportName = document.getElementById('addAirportName');
+  const addCity = document.getElementById('addCity');
+  const addAdminDiv = document.getElementById('addAdministrativeDivision');
+  const addCountry = document.getElementById('addCountry');
+
+  const airportCode = addAirportCode.value;
+  const airportName = addAirportName.value;
+  const city = addCity.value;
+  const adminDiv = addAdminDiv.value;
+  const country = addCountry.value;
+
 
   if (!username.validity.valid) {
     return;
@@ -263,11 +271,13 @@ function addDestination() {
 function addEventListeners() {
   const logOutButton = document.getElementById('logOutButton');
   const searchButton = document.getElementById('searchButton');
+  const addButton = document.getElementById('addButton');
 
   // defined in general.js
   // eslint-disable-next-line no-undef
   logOutButton.addEventListener('click', logout);
   searchButton.addEventListener('click', searchForDestinations);
+  addButton.addEventListener('click', addDestination);
 }
 
 
