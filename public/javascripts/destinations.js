@@ -204,10 +204,12 @@ function addDestination() {
 
 
 function addEventListeners() {
-  // const saveButton = document.getElementById('saveButton');
+  const logOutButton = document.getElementById('logOutButton');
   const searchButton = document.getElementById('searchButton');
 
-  // saveButton.addEventListener('click', addDestination);
+  // defined in general.js
+  // eslint-disable-next-line no-undef
+  logOutButton.addEventListener('click', logout);
   searchButton.addEventListener('click', searchForDestinations);
 }
 
