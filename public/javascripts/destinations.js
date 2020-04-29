@@ -14,6 +14,7 @@ function getAirportInfo(htmlRow, i) {
 }
 
 function updateDestination(htmlRow) {
+  console.log('attempting to update destination');
   const editAirportCode = document.getElementById('editAirportCode');
   const editAirportName = document.getElementById('editAirportName');
   const editCity = document.getElementById('editCity');
@@ -21,13 +22,16 @@ function updateDestination(htmlRow) {
   const editCountry = document.getElementById('editCountry');
 
   // PK absolultely do not change when updating
-  const airpotCode = editAirportCode.value;
+  const airportCode = editAirportCode.value;
 
   // Potential attributes to be changed
   let airportName = editAirportName.value;
   let city = editCity.value;
-  let adminDiv = editAdminDiv;
-  let country = editCountry;
+  let adminDiv = editAdminDiv.value;
+  let country = editCountry.value;
+
+
+  console.log(`User entered ${airportName} ${city} ${adminDiv} ${country}`);
 
   if (airportName === getAirportInfo(htmlRow, 1)) {
     airportName = '';
@@ -45,9 +49,33 @@ function updateDestination(htmlRow) {
     country = '';
   }
 
+  if (airportName === '' && city === '' && adminDiv === '' && country === '') {
+    // eslint-disable-next-line no-restricted-globals
+    alert('You have not made any changes to any fields!');
+    return;
+  }
 
+  const url = `../api/admin/getDestinations?airportCode=${airportCode}&airportName=${airportName}`
+  + `&city=${city}&administrativeDivision=${adminDiv}&country=${country}`;
 
-
+  fetch(url, {
+    method: 'PATCH'
+  })
+    // eslint-disable-next-line consistent-return
+    .then((response) => {
+      if (response.status !== 200) {
+        alert('Could not update destination!');
+      } else {
+        return response.json;
+      }
+    })
+    .then((response) => {
+      if (response.deleteDestination === true) {
+        alert('Destination updated!');
+      }
+      // eslint-disable-next-line no-restricted-globals
+      location.reload();
+    }).catch((err) => console.log(err));
 }
 
 function prepInputFields(htmlRow) {
@@ -82,7 +110,7 @@ function removeDestination(data) {
     })
     .then((response) => {
       if (response.deleteDestination === true) {
-        alert('Destination Deleted');
+        alert('Destination deleted!');
       }
       // eslint-disable-next-line no-restricted-globals
       location.reload();
@@ -123,7 +151,7 @@ function editDestination(elem) {
 
   prepInputFields(rowInformation);
 
-  editBtn.addEventListener('click', () => { updateDestination(rowInformation) });
+  editBtn.addEventListener('click', () => { updateDestination(rowInformation); });
   instance.open();
 }
 

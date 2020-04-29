@@ -80,4 +80,11 @@ async function deleteDestination(inputAirportCode) {
     return true;
 }
 
+async function updateDestination(inputAirportCode, inputAirportName, inputCity, inputAdminDiv, inputCountry) {
+
+    let query = 'UPDATE destinations ';
+
+
+}
+
 module.exports = { getDestinations, deleteDestination };

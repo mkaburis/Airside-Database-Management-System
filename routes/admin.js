@@ -111,6 +111,7 @@ router.get('/getDestinations', async (req, res) => {
   return res.send(queryResults);
 });
 
+/* Delete Destination Listing */
 router.delete('/deleteDestination', async (req, res) => {
   const { airportCode } = req.query;
 
@@ -122,6 +123,14 @@ router.delete('/deleteDestination', async (req, res) => {
     return res.status(200).json({ message: 'Destination deleted successfully' });
   }
   return res.status(500).json({ message: 'Error deleting destination' });
+});
+
+/* Update Destination Listing */
+router.patch('/updateDestination', async (req, res) => {
+  const { airportCode, airportName, city, administrativeDivision, country } = req.query;
+
+  const success = await
+
 });
 
 module.exports = router;
