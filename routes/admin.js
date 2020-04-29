@@ -1,8 +1,10 @@
 const express = require('express');
 
-const { addUser, getAllUsers, changePemission, deleteUser } = require('../models/user');
+const {
+  addUser, getAllUsers, changePemission, deleteUser
+} = require('../models/user');
 
-const { getDestinations, deleteDestination } = require('../models/destination');
+const { getDestinations, deleteDestination, updateDestination } = require('../models/destination');
 
 const router = express.Router();
 
@@ -127,10 +129,17 @@ router.delete('/deleteDestination', async (req, res) => {
 
 /* Update Destination Listing */
 router.patch('/updateDestination', async (req, res) => {
-  const { airportCode, airportName, city, administrativeDivision, country } = req.query;
+  const {
+    airportCode, airportName, city, administrativeDivision, country
+  } = req.query;
 
-  const success = await
+  const success = await updateDestination(airportCode, airportName, city, administrativeDivision,
+    country);
 
+  if (success === true) {
+    return res.status(200).json({ message: 'Destination updated successfully' });
+  }
+  return res.status(500).json({ message: 'Error updating destination' });
 });
 
 module.exports = router;

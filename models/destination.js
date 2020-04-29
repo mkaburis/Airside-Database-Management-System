@@ -82,9 +82,93 @@ async function deleteDestination(inputAirportCode) {
 
 async function updateDestination(inputAirportCode, inputAirportName, inputCity, inputAdminDiv, inputCountry) {
 
-    let query = 'UPDATE destinations ';
+    let query = 'UPDATE destinations SET ';
 
+    console.log(`${inputAirportName} ${inputCity} ${inputAdminDiv} ${inputCountry}`)
 
+    if (inputAirportName !== '' && inputCity !== '' && inputAdminDiv !== '' && inputCountry !== '') {
+        console.log('yay!')
+        query = query.concat(`airportName = '${inputAirportName}', city = '${inputCity}', `
+        + `administrativeDivision = '${inputAdminDiv}', country = '${inputCountry}' `);
+    }
+
+    else if (inputAirportName !== '' && inputCity !== '' && inputAdminDiv !== '') {
+        query = query.concat(`airportName = '${inputAirportName}', city = '${inputCity}', `
+        + `administrativeDivision = '${inputAdminDiv}' `);
+    }
+
+    else if (inputAirportName !== '' && inputCity !== '' && inputCountry !== '') {
+        query = query.concat(`airportName = '${inputAirportName}',  city = '${inputCity}', ` 
+        + `country = '${inputCountry}' `);
+    }
+
+    else if (inputCity !== '' && inputAdminDiv !== '' && inputCountry !== '') {
+        query = query.concat(`city = '${inputCity}', administrativeDivision = '${inputAdminDiv}', `
+        + `country = '${inputCountry}' `);
+    }
+
+    else if (inputAirportName !== '' && inputCity !== '') {
+        query = query.concat(`airportName = '${inputAirportName}', city = '${inputCity}' `);
+    }
+
+    else if (inputAirportName !== '' && inputAdminDiv !== '') {
+        query = query.concat(`airportName = '${inputAirportName}', administrativeDivision = '${inputAdminDiv}' `);
+    }
+
+    else if (inputAirportName !== '' && inputCountry !== '') {
+        query = query.concat(`airportName = '${inputAirportName}', country = '${inputCountry}' `);
+    }
+
+    else if (inputCity !== '' && inputAdminDiv !== '') {
+        query = query.concat(`city = '${inputCity}', administrativeDivision = '${inputAdminDiv}' `);
+    }
+
+    else if (inputCity !== '' && inputCountry !== '') {
+        query = query.concat(`city = '${inputCity}',  country = '${inputCountry}' `);
+    }
+
+    else if (inputAdminDiv !== '' && inputCountry !== '') {
+        query = query.concat(`administrativeDivision = '${inputAdminDiv}', country = '${inputCountry}' `);
+    }
+
+    else if (inputAirportName !== '') {
+        query = query.concat(`airportName = '${inputAirportName}' `);
+    }
+
+    else if (inputCity !== '') {
+        query = query.concat(`city = '${inputCity}' `);
+    }
+
+    else if (inputAdminDiv !== '') {
+        query = query.concat(`administrativeDivision = '${inputAdminDiv}' `);
+    }
+
+    else if (inputCountry !== '') {
+        query = query.concat(`country = '${inputCountry}' `);
+    }
+
+    else {
+        return false;
+    }
+
+    query = query.concat(`WHERE airportcode = '${inputAirportCode}' RETURNING *;`);
+
+    console.log(query);
+
+    const result = await db.query(query)
+        .then((res) => {
+            return res.rows;
+        })
+        .then((res) => res.map((entry) => {
+            const destination = new Destinations(entry.airportcode, entry.airportname, entry.city,
+                entry.administrativedivision, entry.country);
+        }));
+
+    if (result.length < 1) {
+        return false;
+    }
+
+    return true;
 }
 
-module.exports = { getDestinations, deleteDestination };
+module.exports = { getDestinations, deleteDestination, updateDestination };

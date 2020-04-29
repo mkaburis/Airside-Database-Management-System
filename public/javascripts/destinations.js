@@ -55,7 +55,7 @@ function updateDestination(htmlRow) {
     return;
   }
 
-  const url = `../api/admin/getDestinations?airportCode=${airportCode}&airportName=${airportName}`
+  const url = `../api/admin/updateDestination?airportCode=${airportCode}&airportName=${airportName}`
   + `&city=${city}&administrativeDivision=${adminDiv}&country=${country}`;
 
   fetch(url, {
