@@ -102,9 +102,6 @@ router.get('/getDestinations', async (req, res) => {
 
   console.log(`${airportCode} ${city}`);
 
-  // This line works for some reason
-  // const queryResults = await getDestinations('TPA', '%', '%', '%');
-  console.log('this is not good lol');
   const queryResults = await getDestinations(airportCode, city, administrativeDivision, country);
 
   if (queryResults.count < 1) {
@@ -116,6 +113,8 @@ router.get('/getDestinations', async (req, res) => {
 
 router.delete('/deleteDestination', async (req, res) => {
   const { airportCode } = req.query;
+
+  console.log(`Airport code to delete is ${airportCode}`);
 
   const success = await deleteDestination(airportCode);
 

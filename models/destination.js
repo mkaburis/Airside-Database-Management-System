@@ -45,19 +45,35 @@ async function getDestinations(inputAirportCode, inputCity,
     }
 
 async function deleteDestination(inputAirportCode) {
-    const query = 'DELETE FROM destinations WHERE airportcode = $1 RETURNING *;';
+    
 
-    console.log(query);
+    const query1 = 'DELETE FROM passengerflights WHERE flightID IN '
+    + '(SELECT flightid FROM flightlogs WHERE routeID IN (SELECT routeId '
+    + 'FROM routes WHERE fliesto = $1 OR fliesfrom = $1));';
 
-    const result = await db.query(query, [inputAirportCode])
+    const query2 = 'DELETE FROM flightlogs WHERE routeID IN '
+    + '(SELECT routeID FROM routes WHERE fliesto = $1 OR fliesfrom = $1);';
+
+    const query3 = 'DELETE FROM routes WHERE fliesTo IN '
+    + '(SELECT airportcode FROM destinations WHERE airportcode = $1) OR '
+    + 'fliesFrom IN (SELECT airportcode FROM destinations WHERE airportcode = $1);';
+
+    const query4 = 'DELETE FROM destinations WHERE airportcode = $1 RETURNING *;';
+
+
+    const result1 = await db.query(query1, [inputAirportCode]);
+    const result2 = await db.query(query2, [inputAirportCode]);
+    const result3 = await db.query(query3, [inputAirportCode]);
+    const result4 = await db.query(query4, [inputAirportCode])
     .then((res) => {
-        return res.rows;
-    }).then((res) => res.map((entry) => {
-        const destination = new Destinations(entry.airportcode, entry.airportname, entry.city, 
+        return res.rows;})
+        .then((res) => res.map((entry) => {
+            const destination = new Destinations(entry.airportcode, entry.airportname, entry.city,
             entry.administrativedivision, entry.country);
     }));
 
-    if (result.length < 1) {
+
+    if (result4.length < 1) {
         return false;
     }
 
