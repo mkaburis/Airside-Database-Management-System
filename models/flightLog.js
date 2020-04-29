@@ -61,14 +61,44 @@ function extractFlightNo(flightNo) {
   };
 }
 
-async function getFlights(airline, flightNum, arrivalAirport, departureAirport) {
+async function getFlights(airline, flightNum, arrivalAirport, departureAirport, isactive) {
   const query = 'SELECT * FROM routes AS t1 LEFT JOIN flightlogs AS t2 ON t1.routeid '
-    + '= t2.routeid  WHERE flightno like $1 AND fliesto like $2 AND fliesfrom like $3 AND airlinecode like $4 and isactive=true '
+    + '= t2.routeid  WHERE flightno like $1 AND fliesto like $2 AND fliesfrom like $3 AND airlinecode like $4 and isactive=$5 '
     + 'ORDER BY departuretime, arrivaltime';
   const result = await db.query(query, [
-    flightNum, arrivalAirport, departureAirport, airline
+    flightNum, arrivalAirport, departureAirport, airline, isactive
     // flightNo, arrivalAirport, departureAirport, airline, yesterday, tommorow
   ])
+    .then((res) => {
+      return res.rows
+    })
+    .then((res) => res.map((entry) => {
+      const flightCode = `${entry.airlinecode} ${entry.flightno}`
+      const flight = new Flights(entry.flightid, flightCode, entry.arrivaltime, entry.departuretime,
+        entry.fliesto, entry.fliesfrom, entry.gateno, entry.isdelayed);
+      return flight;
+    }));
+
+  return result;
+}
+
+async function getFlights(params, values) {
+  let query = 'SELECT * FROM routes AS t1 LEFT JOIN flightlogs AS t2 ON t1.routeid = t2.routeid '
+
+  if (params.length > 0) {
+    query += 'WHERE ';
+
+    for (let index = 0; index < params.length - 1; index++) {
+      const element = params[index];
+      query += `${element.field} ${element.op} $${index + 1} AND `
+    }
+
+    const lastElem = params[params.length - 1];
+    query += `${lastElem.field} ${lastElem.op} $${params.length} `
+  }
+  query += 'ORDER BY departuretime, arrivaltime';
+
+  const result = await db.query(query, values)
     .then((res) => {
       return res.rows
     })

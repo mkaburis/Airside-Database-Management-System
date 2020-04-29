@@ -40,7 +40,11 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/flightSearch', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../public/index.html'));
+  const { loggedin } = req.session;
+
+  const file = (loggedin) ? 'staffFlightSearch.html' : 'index.html';
+
+  return res.sendFile(path.resolve(__dirname, '../public/', file));
 });
 
 router.get('/profile', isAuthenticated, (req, res) => {

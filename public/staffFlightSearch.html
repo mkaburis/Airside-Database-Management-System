@@ -10,7 +10,8 @@
         <!--Import materialize.css-->
         <link href="stylesheets/materialize.min.css" rel="stylesheet" />
 
-        <link href="stylesheets/index.css" rel="stylesheet" />
+        <link href="stylesheets/flightSearch.css" rel="stylesheet" />
+        <!-- <link href="stylesheets/staffDashboard.css" rel="stylesheet" /> -->
     </head>
 
     <body>
@@ -33,7 +34,7 @@
                     <div class="col m8 offset-m2">
                         <div class="card white darken-1">
 
-                            <div class="card-content light-blue darken-1">
+                            <div class="card-content red lighten-1">
                                 <span class="card-title">Search for Fights</span>
                             </div>
                             <div class="card-action">
@@ -52,6 +53,31 @@
                                             <div class="input-field col s4">
                                                 <input id="arrivalAirport" type="text" maxlen="3">
                                                 <label for="arrivalAirport">Destination</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s4">
+                                                <input type="text" class="datepicker" id="startDate">
+                                                <label for="startDate">Start Date</label>
+                                            </div>
+
+                                            <div class="input-field col s4">
+                                                <input type="text" class="datepicker" id="endDate">
+                                                <label for="endDate">End Date</label>
+                                            </div>
+                                            <div class="input-field col s4">
+                                                <select id='optionSelect'>
+                                                    <option value="All">All</option>
+                                                    <optgroup label="Active">
+                                                        <option value="Active">Active Only</option>
+                                                        <option value="Inactive">Inactive Only</option>
+                                                    </optgroup>
+                                                    <optgroup label="Delayed">
+                                                        <option value="Delayed">Delayed Only</option>
+                                                        <option value="OnTime">On-Time Only</option>
+                                                    </optgroup>
+                                                </select>
+                                                <label>Other Options</label>
                                             </div>
                                         </div>
 
@@ -95,7 +121,7 @@
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="javascripts/materialize.min.js"></script>
-        <script src="javascripts/index.js"></script>
+        <script src="javascripts/flightSearch.js"></script>
     </body>
 
 </html>

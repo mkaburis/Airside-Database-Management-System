@@ -76,12 +76,8 @@ function searchForFlights() {
   const depatureAirport = document.getElementById('depatureAirport').value;
   const arrivalAirport = document.getElementById('arrivalAirport').value;
 
-  const startDate = document.getElementById('startDate').value;
-  const endDate = document.getElementById('endDate').value;
-  const selected = document.getElementById('optionSelect').value;
 
-  const url = `../api/flights/advanced?flightNo=${flightNo}&departureAirport=${depatureAirport}
-  &arrivalAirport=${arrivalAirport}&option=${selected}&before=${startDate}&after=${endDate}`;
+  const url = `../api/flights/simple?flightNo=${flightNo}&departureAirport=${depatureAirport}&arrivalAirport=${arrivalAirport}`;
 
   fetch(url)
     .then(handleErrors)
@@ -104,8 +100,4 @@ function addEventListeners() {
 
 window.addEventListener('DOMContentLoaded', () => {
   addEventListeners();
-  datepickerElems = document.querySelectorAll('.datepicker');
-  M.Datepicker.init(datepickerElems);
-  const selectElems = document.querySelectorAll('select');
-  M.FormSelect.init(selectElems);
 }, false);
