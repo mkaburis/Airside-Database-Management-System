@@ -1,10 +1,3 @@
-function handleErrors(response) {
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  return response;
-}
-
 function addRow(entry) {
   const tr = document.createElement('tr');
 
@@ -76,17 +69,25 @@ function searchForFlights() {
   const depatureAirport = document.getElementById('depatureAirport').value;
   const arrivalAirport = document.getElementById('arrivalAirport').value;
 
+  const errorSpan = document.getElementById('errorSpan');
+  errorSpan.style.display = 'none';
+
 
   const url = `../api/flights/simple?flightNo=${flightNo}&departureAirport=${depatureAirport}&arrivalAirport=${arrivalAirport}`;
 
   fetch(url)
-    .then(handleErrors)
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json();
+      }
+      throw Error(response.statusText);
+    })
     .then((data) => {
       fillFlightsTable(data);
     })
     .catch((error) => {
-      console.error('There has been a problem with your fetch operation:', error);
+      errorSpan.innerText = error;
+      errorSpan.style.display = 'block';
     });
 }
 

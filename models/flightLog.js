@@ -110,11 +110,10 @@ async function getPassengerFlightList(passengerId) {
 }
 
 async function getPassengerFlight(passengerId, flightId) {
-  const query = 'SELECT * FROM passengers'
-    + ' INNER JOIN passengerflights ON passengers.passengerid = passengerflights.passengerid'
+  const query = 'SELECT * FROM passengerflights'
     + ' INNER JOIN flightlogs ON passengerflights.flightId = flightlogs.flightId'
     + ' INNER JOIN routes ON routes.routeid = flightlogs.routeid'
-    + ' WHERE passengers.passengerid = $1 AND flightlogs.flightId = $2';
+    + ' WHERE passengerflights.passengerid = $1 AND flightlogs.flightId = $2';
 
   const result = await db.query(query, [passengerId, flightId])
     .then((response) => response.rows[0])

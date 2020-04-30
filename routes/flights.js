@@ -10,7 +10,8 @@ router.get('/simple', async (req, res) => {
   const { airline, flightNum } = extractFlightNo(flightNo);
 
   if ((flightNum === null && airline !== null) || (flightNum !== null && airline === null)) {
-    return res.Status(404).json({ error: 'Flight number must have airline and flight number' });
+    const error = 'Flight number must have airline and flight number';
+    return res.status(404).json(error);
   }
 
   const param = [];

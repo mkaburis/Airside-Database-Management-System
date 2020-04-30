@@ -15,19 +15,23 @@
     </head>
 
     <body>
-        <header class="header-nav-bar">
-            <nav>
-                <div class="nav-wrapper black-text">
-                    <a href="#" class="logo">
-                        <img src="images/tpa_logo_nav.jpeg" /></a>
-                    <a href="#" class="brand-logo black-text">Airside</a>
+        <div class="navbar-fixed">
+            <nav class="nav-extended">
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo center white-text"><img class="left"
+                            src="images/tpa-logo-nav-white-background.jpeg" />Staff Flight Search</a>
+
+                    <ul id="nav-mobile" class="left hide-on-med-and-down">
+                        <li><a href="dashboard" class="white-text"><i class="material-icons left">arrow_back</i></a>
+                    </ul>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="login" class="black-text"><i class="material-icons left">vpn_key</i>Login</a>
+                        <li><a class="white-text" id='logOutButton'><i class="large material-icons">exit_to_app</i></a>
                         </li>
                     </ul>
                 </div>
             </nav>
-        </header>
+        </div>
+
         <div class="center-align">
             <div class="container">
                 <div class="row">
@@ -86,7 +90,7 @@
                                                 type="button" id="searchButton">Search<i
                                                     class="material-icons right">search</i>
                                         </div>
-
+                                        <span id="errorSpan"></span>
                                     </form>
 
                                 </div>
@@ -121,6 +125,7 @@
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="javascripts/materialize.min.js"></script>
+        <script src="javascripts/general.js"></script>
         <script src="javascripts/flightSearch.js"></script>
     </body>
 

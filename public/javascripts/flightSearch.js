@@ -80,6 +80,9 @@ function searchForFlights() {
   const endDate = document.getElementById('endDate').value;
   const selected = document.getElementById('optionSelect').value;
 
+  const errorSpan = document.getElementById('errorSpan');
+  errorSpan.style.display = 'none';
+
   const url = `../api/flights/advanced?flightNo=${flightNo}&departureAirport=${depatureAirport}
   &arrivalAirport=${arrivalAirport}&option=${selected}&before=${startDate}&after=${endDate}`;
 
@@ -90,14 +93,19 @@ function searchForFlights() {
       fillFlightsTable(data);
     })
     .catch((error) => {
-      console.error('There has been a problem with your fetch operation:', error);
+      errorSpan.innerText = error;
+      errorSpan.style.display = 'block';
     });
 }
 
 
 function addEventListeners() {
+  const logOutButton = document.getElementById('logOutButton');
   const searchButton = document.getElementById('searchButton');
 
+  // defined in general.js
+  // eslint-disable-next-line no-undef
+  logOutButton.addEventListener('click', logout);
   searchButton.addEventListener('click', searchForFlights);
 }
 
