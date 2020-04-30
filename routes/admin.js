@@ -4,7 +4,7 @@ const {
   addUser, getAllUsers, changePemission, deleteUser
 } = require('../models/user');
 
-const { getDestinations, deleteDestination, updateDestination } = require('../models/destination');
+const { addDestination, getDestinations, deleteDestination, updateDestination } = require('../models/destination');
 
 const router = express.Router();
 
@@ -78,6 +78,21 @@ router.delete('/deleteUser', async (req, res) => {
 
 
 // Destination APIs
+
+/* ADD destination listing */
+router.post('/addDestination', async (req, res) => {
+  const {
+    airportCode, airportName, city, administrativeDivision, country
+  } = req.query;
+
+  const success = await addDestination(airportCode, airportName, city, administrativeDivision,
+    country);
+
+  if (success === true) {
+    return res.status(200).json({ message: 'Destination added!' });
+  }
+  return res.status(500).json({ message: 'Error adding destination' });
+});
 
 /* GET destinations listing */
 router.get('/getDestinations', async (req, res) => {

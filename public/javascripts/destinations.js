@@ -249,22 +249,34 @@ function addDestination() {
   const adminDiv = addAdminDiv.value;
   const country = addCountry.value;
 
-
-  if (!username.validity.valid) {
+  if (airportCode === '' || airportName === '' || city === '' || country === '') {
+    // eslint-disable-next-line no-alert
+    alert('The airport node, airport name, city, and country fields are required!')
     return;
   }
 
-  const url = `../api/admin/getDestinations?airportCode=${usernameVal}&permission=${selectedAuth}`;
-  fetch(url, { method: 'POST' })
+
+  const url = `../api/admin/addDestination?airportCode=${airportCode}&airportName=${airportName}`
+  + `&city=${city}&administrativeDivision=${adminDiv}&country=${country}`;
+
+  fetch(url, {
+    method: 'POST'
+  })
+    // eslint-disable-next-line consistent-return
     .then((response) => {
-      if (response.status === 200) {
-        username.value = '';
-        return;
+      if (response.status !== 200) {
+        alert('Could not add destination!');
+      } else {
+        return response.json;
       }
-      alert('Error adding user');
-      throw response.statusText;
     })
-    .catch((err) => console.log(err));
+    .then((response) => {
+      if (response.deleteDestination === true) {
+        alert('Destination added!');
+      }
+      // eslint-disable-next-line no-restricted-globals
+      location.reload();
+    }).catch((err) => console.log(err));
 }
 
 
