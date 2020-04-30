@@ -22,10 +22,19 @@ router.post('/login', async (req, res) => {
   return res.json({ dashUrl: dashboardPath, auth: true });
 });
 
-router.post('/logout', (req, res) => {
+router.post('/logout', (req, res, next) => {
   req.session.user = null;
   req.session.loggedin = false;
-  res.redirect('/login');
+
+  if (req.session) {
+    // Destroy the session object
+    req.session.destroy((err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect('/login');
+    });
+  }
 });
 
 router.post('/profile', async (req, res) => {
