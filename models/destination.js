@@ -17,6 +17,29 @@ class Destinations {
     }
 }
 
+async function addDestination(inputAirportCode, inputAirportName, inputCity,
+    inputAdminDiv, inputCountry) {
+        const query = 'INSERT INTO destinations (airportcode, airportname, city, '
+        + 'administrativedivision, country) VALUES ($1, $2, $3, $4, $5) RETURNING *;'
+
+        const result = await db.query(query, [inputAirportCode, inputAirportName, inputCity,
+        inputAdminDiv, inputCountry])
+        .then((res) => {
+            return res.rows;
+        })
+        .then((res) => res.map((entry) => {
+
+            const destination = new Destinations(entry.airportcode, entry.airportname, entry.city, 
+                entry.administrativedivision, entry.country);
+        }));
+
+        if (result.length < 1) {
+            return false;
+        }
+
+        return true;
+    }
+
 async function getDestinations(inputAirportCode, inputCity,
     inputAdminDiv, inputCountry) {
         const query = 'SELECT * FROM Destinations WHERE airportcode LIKE $1 AND city like $2 '
@@ -171,4 +194,4 @@ async function updateDestination(inputAirportCode, inputAirportName, inputCity, 
     return true;
 }
 
-module.exports = { getDestinations, deleteDestination, updateDestination };
+module.exports = { addDestination, getDestinations, deleteDestination, updateDestination };

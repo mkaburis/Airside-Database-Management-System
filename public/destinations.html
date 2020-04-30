@@ -22,7 +22,6 @@
                     <li><a href="dashboard" class="white-text"><i class="material-icons left">arrow_back</i></a>
                 </ul>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <!-- <li><button type="button" id='logOutButton'><i class="material-icons">exit_to_app</i></a> -->
                     <li><a class="white-text" id='logOutButton'><i class="large material-icons">exit_to_app</i></a>
                     </li>
                 </ul>
@@ -114,8 +113,10 @@
                 <h4>Delete Destination</h4>
             </div>
             <div class="modal-content">
-                
-                <p class="center-align"><i class="inline-icon material-icons red-text medium">warning</i>Are you sure you want to delete this destination from Airside DBMS?</p>
+
+                <p class="center-align"><i class="inline-icon material-icons red-text medium">warning</i>Are you sure
+                    you want to delete this destination from Airside DBMS? This will remove this detination from all other
+                    tables within the database.</p>
             </div>
             <div class="modal-footer">
                 <a href="#!" id="cancelDelete" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
@@ -128,7 +129,7 @@
                 <h4>Edit Existing Destination</h4>
             </div>
             <div class="modal-content">
-                <p>You may make modifications to the following fields. If you do not wish to 
+                <p>You may make modifications to the following fields. If you do not wish to
                     udpate a field, you do not need to change its contents.
                 </p>
                 <div class="row notBottomMargin">
@@ -161,15 +162,16 @@
                             </div>
                         </div>
                     </form>
-            </div>
-            <div class="modal-footer">
-                <a href="#!" id="cancelEdit" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
-                <a href="#!" id="acceptEdit" class="modal-close waves-effect waves-green btn-flat">Edit</a>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" id="cancelEdit" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+                    <a href="#!" id="acceptEdit" class="modal-close waves-effect waves-green btn-flat">Edit</a>
+                </div>
             </div>
         </div>
     </div>
-    <div id="addDestination" class="col s12">
-        <div class="center-align">
+        <div id="addDestination" class="col s12">
+            <div class="center-align">
             <div class="container">
                 <div class="row">
                     <div class="col m8 offset-m2">
@@ -182,32 +184,33 @@
                                     <form class="col s12">
                                         <div class="row">
                                             <div class="input-field col s3">
-                                                <input id="airportCode" type="text" maxlen="3">
-                                                <label for="airportCode">Airport Code</label>
+                                                <input id="addAirportCode" type="text" maxlen="3" required>
+                                                <label for="addAirportCode">Airport Code</label>
                                             </div>
 
-                                            <div class="input-field col s6">
-                                                <input id="airportName" type="text">
-                                                <label for="airportName">Airprt Name</label>
+                                            <div class="input-field col s5">
+                                                <input id="addAirportName" type="text" required>
+                                                <label for="addAirportName">Airprt Name</label>
                                             </div>
 
-
-                                            <div class="input-field col s3">
-                                                <input id="city" type="text">
-                                                <label for="city">City</label>
+                                            <div class="input-field col s4">
+                                                <input id="addCity" type="text" required>
+                                                <label for="addCity">City</label>
+                                            </div>
+                                        </div>   
+                                        <div class="row">                                      
+                                            <div class="input-field col s4">
+                                                <input id="addAdministrativeDivision" type="text">
+                                                <label for="addAdministrativeDivision">Admininstrative Division</label>
                                             </div>
                                             <div class="input-field col s3">
-                                                <input id="administrativeDivision" type="text">
-                                                <label for="administrativeDivision">AdminDivision</label>
-                                            </div>
-                                            <div class="input-field col s3">
-                                                <input id="country" type="text">
-                                                <label for="country">Country</label>
+                                                <input id="addCountry" type="text" required>
+                                                <label for="addCountry">Country</label>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <button class="btn waves-effect waves-light black" type="button"
-                                                id="searchButton">Search<i class="material-icons right">search</i>
+                                                id="addButton">Add Destination<i class="material-icons right">add</i>
                                         </div>
                                     </form>
                                 </div>
@@ -218,18 +221,18 @@
             </div>
         </div>
 
-    </div>
+        </div>
 
 
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="javascripts/general.js"></script>
-    <script src="javascripts/materialize.min.js"></script>
-    <script src="javascripts/destinations.js"></script>
-    <script>
-        const el = document.querySelector('.tabs');
-        const instance = M.Tabs.init(el, {});
-    </script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="javascripts/general.js"></script>
+        <script src="javascripts/materialize.min.js"></script>
+        <script src="javascripts/destinations.js"></script>
+        <script>
+            const el = document.querySelector('.tabs');
+            const instance = M.Tabs.init(el, {});
+        </script>
 </body>
 
 </html>

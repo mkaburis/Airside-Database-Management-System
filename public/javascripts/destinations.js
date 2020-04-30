@@ -237,37 +237,59 @@ function searchForDestinations() {
 }
 
 function addDestination() {
-  const username = document.getElementById('username');
-  const authRadioGroup = document.getElementById('authRadioGroup');
-  const selectedAuth = authRadioGroup.querySelector('input[name="authRadio"]:checked').value;
-  const usernameVal = username.value;
+  const addAirportCode = document.getElementById('addAirportCode');
+  const addAirportName = document.getElementById('addAirportName');
+  const addCity = document.getElementById('addCity');
+  const addAdminDiv = document.getElementById('addAdministrativeDivision');
+  const addCountry = document.getElementById('addCountry');
 
-  if (!username.validity.valid) {
+  const airportCode = addAirportCode.value;
+  const airportName = addAirportName.value;
+  const city = addCity.value;
+  const adminDiv = addAdminDiv.value;
+  const country = addCountry.value;
+
+  if (airportCode === '' || airportName === '' || city === '' || country === '') {
+    // eslint-disable-next-line no-alert
+    alert('The airport node, airport name, city, and country fields are required!')
     return;
   }
 
-  const url = `../api/admin/getDestinations?airportCode=${usernameVal}&permission=${selectedAuth}`;
-  fetch(url, { method: 'POST' })
+
+  const url = `../api/admin/addDestination?airportCode=${airportCode}&airportName=${airportName}`
+  + `&city=${city}&administrativeDivision=${adminDiv}&country=${country}`;
+
+  fetch(url, {
+    method: 'POST'
+  })
+    // eslint-disable-next-line consistent-return
     .then((response) => {
-      if (response.status === 200) {
-        username.value = '';
-        return;
+      if (response.status !== 200) {
+        alert('Could not add destination!');
+      } else {
+        return response.json;
       }
-      alert('Error adding user');
-      throw response.statusText;
     })
-    .catch((err) => console.log(err));
+    .then((response) => {
+      if (response.deleteDestination === true) {
+        alert('Destination added!');
+      }
+      // eslint-disable-next-line no-restricted-globals
+      location.reload();
+    }).catch((err) => console.log(err));
 }
 
 
 function addEventListeners() {
   const logOutButton = document.getElementById('logOutButton');
   const searchButton = document.getElementById('searchButton');
+  const addButton = document.getElementById('addButton');
 
   // defined in general.js
   // eslint-disable-next-line no-undef
   logOutButton.addEventListener('click', logout);
   searchButton.addEventListener('click', searchForDestinations);
+  addButton.addEventListener('click', addDestination);
 }
 
 
