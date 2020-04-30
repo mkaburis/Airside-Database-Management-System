@@ -96,8 +96,12 @@ function searchForFlights() {
 
 
 function addEventListeners() {
+  const logOutButton = document.getElementById('logOutButton');
   const searchButton = document.getElementById('searchButton');
 
+  // defined in general.js
+  // eslint-disable-next-line no-undef
+  logOutButton.addEventListener('click', logout);
   searchButton.addEventListener('click', searchForFlights);
 }
 
